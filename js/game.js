@@ -37,10 +37,13 @@ Game.prototype.playGame = function(){
     // Show question in cell: grid.js
     this.grid.showQuestion(userCell);
     // handle user selection from question (check to see right or wrong)
-
+    this.handleUserSelection();
     // check win conditions
+    this.grid.checkWinConditions();
     // update grid
+    this.grid.updateGrid();
     // switch turns
+    this.switchTurns();
 };
 
 Game.prototype.switchTurns = function(){
@@ -49,5 +52,5 @@ Game.prototype.switchTurns = function(){
 
 Game.prototype.handleUserSelection = function(){
 
-}
+};
 

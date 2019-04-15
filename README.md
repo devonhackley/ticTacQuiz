@@ -8,7 +8,7 @@ We created a Tic Tac Toe quiz game made for 2 players. Players take turns; on th
 
 ## User Profiles and Statistics
 
-Unique usernames track the number of wins, losses, and draws that player has. Players can look at the Leaderboard and see a list of the players with the best win/loss records!
+Unique usernames track the number of wins, losses, and draws for that player. Players can look at the Leaderboard and see a list of the players with the best win/loss records!
 
 ## Customization
 

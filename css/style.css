@@ -1,0 +1,13 @@
+.profilePic {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
+
+h4 {
+  margin: 0px auto 10px;
+}
+
+p {
+  margin: 0px auto 50px;
+}

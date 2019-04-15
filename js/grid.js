@@ -20,3 +20,11 @@ Grid.prototype.getCellSelection = function(){
     console.log('selected cell');
     return 0;
 };
+
+Grid.prototype.checkWinConditions = function(){
+    console.log('the win conditions');
+};
+
+Grid.prototype.updateGrid = function(){
+    console.log('grid has been updated');
+};

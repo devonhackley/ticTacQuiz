@@ -27,6 +27,7 @@ function handleNewQuestionSubmit(event) {
 
     event.target.correctAnswer.value = null;
 
+    console.log(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
     // eslint-disable-next-line no-undef
     new Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
 
@@ -119,7 +120,10 @@ var quizBank = JSON.parse(localStorage['quizBank']);
 
 function fillQuizSelector() {
     quizNameSelector.innerHTML = '';
-    var optionEl;
+    var optionEl = document.createElement('option');
+    optionEl.setAttribute('value', 'placeholder');
+    optionEl.textContent = 'Please select a quiz...';
+    quizNameSelector.append(optionEl);
     // Later, include a placeholder option here
     for (var i = 0 ; i < Object.keys(quizBank).length ; i++) {
         optionEl = document.createElement('option');

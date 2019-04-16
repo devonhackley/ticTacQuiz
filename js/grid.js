@@ -72,16 +72,16 @@ Grid.prototype.keepScore = function(){
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerOnePoints++;
                 // checkWin logic
-                Grid.checkWinConditions();
+                this.checkWinConditions();
                 // checkTie logic
-                Grid.checkTie();
+                this.checkTie();
             } else if (playerTwoChoices.includes(innerArr[j])) {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerTwoPoints++;
                 // checkWin logic
-                Grid.checkWinConditions();
+                this.checkWinConditions();
                 // checkTie logic
-                Grid.checkTie();
+                this.checkTie();
             }
         }
         // zero out the players points if neither player reached 3 points through the check.

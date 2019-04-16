@@ -81,10 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ////////////////////// helper functions //////////////////////
 
+var clickHandler = (e) => {
+    console.log(`The cell with ID ${e.target.id} has been clicked!`);
+};
+
 // adding boxlistners
 var addBoxListeners = () => {
     for(let i = 0; i < gridSquares.length; i++){
-        gridSquares[i].addEventListener('click', clickhandlefunction());
+        gridSquares[i].addEventListener('click', clickHandler);
     }
 };
 

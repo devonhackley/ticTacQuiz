@@ -34,6 +34,7 @@ Grid.prototype.initializeGrid = function(){
     var tfQuestionsIndicesArray = this.makeArrayofIndices(tfQuestions.length);
     var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);
 
+    //create arrays of randomized indices for true/false and mutltiple choice questions
     var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
     var randomTrueFalseIndices = this.randomizeArray(tfQuestionsIndicesArray, 9);
 

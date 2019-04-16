@@ -12,6 +12,7 @@ const Cell = function(quizName){
     this.tieBreakerQuestion = [];
     this.winner;
     this.winnerIcon;
+    console.log('Cell created.');
 };
 
 const Grid = function(game){
@@ -19,6 +20,7 @@ const Grid = function(game){
     this.quizName = game['quizName'];
     this.cells = [];
     this.initializeGrid();
+    console.log('Grid initialized');
 };
 
 // sets up grid will cells and cell info
@@ -131,10 +133,6 @@ Grid.prototype.makeArrayofIndices = function(arrayLength) {
     }
     return result;
 };
-
-
-var grid = new Grid();
-grid.initializeGrid();
 
 
 

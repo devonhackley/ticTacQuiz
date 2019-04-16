@@ -14,3 +14,9 @@ new Player('Peter');
 new Player('Paolo');
 new Player('Tisha');
 new Player('Devon');
+
+if(localStorage['playerBank']){
+    playerBank = JSON.parse(localStorage['playerBank']);
+} else {
+    localStorage.setItem('playerBank', JSON.stringify(playerBank));
+}

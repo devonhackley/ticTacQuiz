@@ -5,8 +5,16 @@ const gameStartForm = document.getElementById('gameStartForm');
 const playerOneIconSelector = document.getElementById('playerOneIcon');
 const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
+
 function populateQuizzes(){
-    console.log('stuff');
+    if(localStorage['quizBank']) {
+        let quizzes = JSON.parse(localStorage['quizBank']);
+        quizzes.forEach((quiz) => {
+            const newEle = document.createElement('option');
+            newEle.textContent = quiz.quizName;
+            gameSelect.appendChild(newEle);
+        });
+    }
 }
 
 function handleGameStartForm(event){
@@ -21,7 +29,7 @@ function handleGameStartForm(event){
     const player1 = new Player(p1);
     const player2 = new Player(p2);
     // create new game from inputs
-    const newGame = new Game(seletedQuiz, player1.userName, player2.userName);
+    const newGame = new Game(selectedQuiz, player1.userName, player2.userName);
 
     // start game
     newGame.playGame();
@@ -43,7 +51,9 @@ function handleIconSelection(event){
     }
 }
 
+populateQuizzes();
 
 // event listener for game start form
 gameStartForm.addEventListener('submit', handleGameStartForm);
 playerOneIconSelector.addEventListener('click', handleIconSelection);
+

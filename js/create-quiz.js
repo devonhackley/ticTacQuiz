@@ -1,14 +1,20 @@
+// These are various DOM access variables.
 var newQuestionForm = document.getElementById('newQuestionForm');
+var newQuizForm = document.getElementById('newQuizForm');
 var responseSection = document.getElementById('responseSection');
 var questionTypeSection = document.getElementById('questionTypeSection');
+var quizNameSelector = document.getElementById('quizName');
 
-// Event handler for the submission of a new question.
+// This variable pulls all currently existing quizzes from local storage.
+var quizBank = JSON.parse(localStorage['quizBank']);
 
+// This function is an event handler for the + New Question form.
 function handleNewQuestionSubmit(event) {
     event.preventDefault();
-    var quizName = event.target.quizName.value;
+    var quizName = quizNameSelector.value;
     var questionType = event.target.questionType.value;
     var questionQuestion = event.target.questionQuestion.value;
+    var correctAnswer = parseInt(event.target.correctAnswer.value);
     if (questionType === 'TrueFalse') {
         var questionResponses = ['True', 'False'];
     } else {
@@ -18,19 +24,42 @@ function handleNewQuestionSubmit(event) {
         event.target.answer3.value = null;
         event.target.answer4.value = null;
     }
-    var correctAnswer = parseInt(event.target.correctAnswer.value);
-    event.target.quizName.value = null;
+
     event.target.questionType.value = null;
     event.target.questionQuestion.value = null;
-
-
     event.target.correctAnswer.value = null;
 
+    console.log(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
     // eslint-disable-next-line no-undef
     new Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
-
 }
 
+// This function is an event handler for the + New Quiz form.
+function handleNewQuizSubmit(event) {
+    event.preventDefault();
+
+    var newQuizName = event.target.newQuizName.value;
+
+    if (Object.keys(quizBank).includes(newQuizName)) {
+        alert('A quiz with this name already exists!');
+
+    } else {
+        event.target.newQuizName.value = null;
+        // eslint-disable-next-line no-undef
+        new Quiz(newQuizName);
+        alert('You\'ve created a new quiz with the name ' + newQuizName + '!');
+
+        quizBank = JSON.parse(localStorage['quizBank']);
+        fillQuizSelector();
+    }
+}
+
+// This function is an event handler to make the '+ New Question' form appear when a quiz name is selected.
+function handleQuizSelected() {
+    document.getElementById('newQuestionForm').style.display = 'unset';
+}
+
+// This function is an event handler for selecting question type.
 function questionTypeHandler(event) {
     responseSection.innerHTML = '';
 
@@ -75,13 +104,44 @@ function questionTypeHandler(event) {
     }
 }
 
+// // This is code in progress to display all questions of the currently selected quiz.
+// function displayCurrentQuiz(event) {
+
+//     var liEl = document.createElement('li');
+//     var currentQuiz = quizNameSelector.value;
+
+//     for (var i = 0 ; i < Object.keys(quizBank[currentQuiz]).length ; i++) {
+
+//     }
 
 
+// var currentQuestions = quizBank. ;
+// }
 
+// This function adds all existing quizzes to the Quiz Selector dropdown menu.
+function fillQuizSelector() {
+    quizNameSelector.innerHTML = '';
+    var optionEl = document.createElement('option');
+    optionEl.setAttribute('value', 'placeholder');
+    optionEl.textContent = 'Please select a quiz...';
+    quizNameSelector.append(optionEl);
+    // Later, include a placeholder option here
+    for (var i = 0 ; i < Object.keys(quizBank).length ; i++) {
+        optionEl = document.createElement('option');
+        optionEl.setAttribute('value', Object.keys(quizBank)[i]);
+        optionEl.textContent = Object.keys(quizBank)[i];
+        quizNameSelector.append(optionEl);
+    }
+}
 
-
-
-
+// These are the event listeners for the Question Type selectors and for the Add New Question button.
 newQuestionForm.addEventListener('submit', handleNewQuestionSubmit);
+newQuizForm.addEventListener('submit', handleNewQuizSubmit);
 questionTypeSection.addEventListener('input', questionTypeHandler);
+quizNameSelector.addEventListener('change', handleQuizSelected);
 
+// This line fills the Quiz Selector on page load.
+fillQuizSelector();
+
+// This is a very useful line for looking at all quiz and question objects.
+console.log(JSON.parse(localStorage['quizBank']));

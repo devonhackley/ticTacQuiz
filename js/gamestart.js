@@ -35,19 +35,20 @@ function handleGameStartForm(event){
                 player2 = play;
             }
         });
-        if(!Object.keys(player1).length || !Object.keys(player2).length){
+        if(!Object.keys(player1).length){ // create them if they arent in the playerBank
             //create players
-            player1 = new Player(p1);
-            player2 = new Player(p2);
+            player1 = new Player(p1); // eslint-disable-line
+        } else if(!Object.keys(player2).length) {
+            player2 = new Player(p2); // eslint-disable-line
         }
 
-    } else {
+    } else { // no local storage
         //create players
-        player1 = new Player(p1);
-        player2 = new Player(p2);
+        player1 = new Player(p1); // eslint-disable-line
+        player2 = new Player(p2); // eslint-disable-line
     }
     // create new game from inputs
-    const newGame = new Game(selectedQuiz, player1.userName, player2.userName);
+    const newGame = new Game(selectedQuiz, player1.userName, player2.userName); // eslint-disable-line
 
     //reset form
     gameStartForm.reset();

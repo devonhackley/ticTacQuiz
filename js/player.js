@@ -2,7 +2,7 @@
 var playerBank = [];
 
 function updateLocalStorage(key, value) {
-    localStorage[key] = JSON.stringify(value);
+    localStorage.setItem(key, JSON.stringify(value));
 }
 
 function Player(userName) {
@@ -15,13 +15,13 @@ function Player(userName) {
     playerBank.push(this); // Adds new player to the playerBank array.
     updateLocalStorage('playerBank', playerBank);
 }
-new Player('Peter');
-new Player('Paolo');
-new Player('Tisha');
-new Player('Devon');
 
 if(localStorage['playerBank']){
     playerBank = JSON.parse(localStorage['playerBank']);
 } else {
+    new Player('Peter');
+    new Player('Paolo');
+    new Player('Tisha');
+    new Player('Devon');
     updateLocalStorage('playerBank', playerBank);
 }

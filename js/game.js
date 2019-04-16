@@ -8,7 +8,7 @@ const Game = function(quiz, playerOne, playerTwo) {
     this.questionBank = this.createQuestionBank();
     // Setup grid
     this.grid = new Grid();
-    this.grid.setUpGrid();
+    this.grid.setUpGrid(quiz);
     this.isPlayerOneTurn = true;
 };
 

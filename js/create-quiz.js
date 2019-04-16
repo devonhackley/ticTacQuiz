@@ -1,4 +1,5 @@
 var newQuestionForm = document.getElementById('newQuestionForm');
+var newQuizForm = document.getElementById('newQuizForm');
 var responseSection = document.getElementById('responseSection');
 var questionTypeSection = document.getElementById('questionTypeSection');
 var quizNameSelector = document.getElementById('quizName');
@@ -29,6 +30,32 @@ function handleNewQuestionSubmit(event) {
     // eslint-disable-next-line no-undef
     new Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
 
+}
+
+function handleNewQuizSubmit(event) {
+    event.preventDefault();
+
+    var newQuizName = event.target.newQuizName.value;
+    console.log('handleNewQuizSubmit function is running!!');
+    if (Object.keys(quizBank).includes(newQuizName)) {
+        alert('A quiz with this name already exists!');
+    } else {
+        event.target.newQuizName.value = null;
+        // eslint-disable-next-line no-undef
+        new Quiz(newQuizName);
+
+
+        alert('You have created a new quiz with the name ' + newQuizName + '!');
+        quizBank = JSON.parse(localStorage['quizBank']);
+        fillQuizSelector();
+    }
+
+}
+
+// This handler function makes the + New Question form appear when a quiz name is selected.
+function handleQuizSelected() {
+
+    document.getElementById('newQuestionForm').style.display = 'unset';
 }
 
 // This function is the event handler for switching between TrueFalse and MultipleChoice type questions.
@@ -91,7 +118,7 @@ var quizBank = JSON.parse(localStorage['quizBank']);
 // }
 
 function fillQuizSelector() {
-
+    quizNameSelector.innerHTML = '';
     var optionEl;
     // Later, include a placeholder option here
     for (var i = 0 ; i < Object.keys(quizBank).length ; i++) {
@@ -104,7 +131,9 @@ function fillQuizSelector() {
 
 // These are the event listeners for the Question Type selectors and for the Add New Question button.
 newQuestionForm.addEventListener('submit', handleNewQuestionSubmit);
+newQuizForm.addEventListener('submit', handleNewQuizSubmit);
 questionTypeSection.addEventListener('input', questionTypeHandler);
+quizNameSelector.addEventListener('change', handleQuizSelected);
 
 // This line fills the Quiz Selector on page load.
 fillQuizSelector();

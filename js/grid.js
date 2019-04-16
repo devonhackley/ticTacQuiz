@@ -16,15 +16,15 @@ const Grid = function(){
 Grid.prototype.setUpGrid = function(){
     //first Grid Instance
     // create 9 cells for this grid
-    for (var i = 0; i < 9; i ++) {
-        this.cells.push(new Cell());
-    }
+    // for (var i = 0; i < 9; i ++) {
+    //     this.cells.push(new Cell());
+    // }
   
-    var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
-    var tfQuestions  = questionBank['tfQuestions'];
-    console.log(tfQuestions);
-    //var randomMultipleChoiceIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8,9], 9);
-    var randomTrueFalseIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8], 9);
+    // var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
+    // //var tfQuestions  = questionBank['tfQuestions'];
+    // //console.log(tfQuestions);
+    // //var randomMultipleChoiceIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8,9], 9);
+    // var randomTrueFalseIndices = this.randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8], 9);
 };
 
 Grid.prototype.populateGrid = function(bank){

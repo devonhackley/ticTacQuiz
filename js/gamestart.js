@@ -19,8 +19,8 @@ function populateQuizzes(){
 
 function handleGameStartForm(event){
     // game info
-    const p1 = event.target.playerOne.value;
-    const p2 = event.target.playerTwo.value;
+    const p1 = event.target.playerOne.value.toLowerCase();
+    const p2 = event.target.playerTwo.value.toLowerCase();
     const selectedQuiz = gameSelect.options[gameSelect.selectedIndex].text;
     let player1 = {};
     let player2 = {};
@@ -29,16 +29,18 @@ function handleGameStartForm(event){
     if (localStorage['playerBank']) { // check to see if players already exist
         const players = JSON.parse(localStorage['playerBank']);
         players.forEach((play) => {
-            if(play.userName === p1){
+            const name = play.userName.toLowerCase();
+            if(name === p1){
                 player1 = play;
-            } else if (play.userName === p2){
+            } else if (name === p2){
                 player2 = play;
             }
         });
         if(!Object.keys(player1).length){ // create them if they arent in the playerBank
             //create players
             player1 = new Player(p1); // eslint-disable-line
-        } else if(!Object.keys(player2).length) {
+        }
+        if(!Object.keys(player2).length) {
             player2 = new Player(p2); // eslint-disable-line
         }
 

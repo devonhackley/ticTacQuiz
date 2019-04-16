@@ -50,3 +50,10 @@ var addBoxListeners = () => {
         gridSquares[i].addEventListener('click', clickhandlefunction());
     }
 };
+
+// removing box listeners
+var removeBoxListeners = () => {
+    for(let i = 0; i < gridSquares.length; i++) {
+        gridSquares[i].removeEventListener();
+    }
+};

@@ -10,6 +10,7 @@ function Quiz(quizName) {
     var quizBank = JSON.parse(localStorage['quizBank']);
     quizBank[quizName] = this;
     localStorage.setItem('quizBank', JSON.stringify(quizBank));
+    console.log('created quiz in local storage');
 }
 
 // Question Constructor
@@ -21,53 +22,12 @@ function Question(quizName, questionType, questionQuestion, questionResponses, c
     this.correctAnswer = correctAnswer; // Value indicating the index in questionResponse array of the correct answer.
 
     // save question in question bank in local storage
-    if (localStorage['quizBank']) {
-        var questions = JSON.parse(localStorage['questionBank']);  
-        if (questionType === 'TrueFalse') {
-            questions[quizName]['tfQuestions'].push(this);
-        } else {
-            questions[quizName]['mcQuestions'].push(this);
-        }
-        localStorage.setItem('quizBank', JSON.stringify(questions));
+    var quizBank = JSON.parse(localStorage['quizBank']);
+    var quizQuestionBank = quizBank[quizName];
+    if (questionType === 'TrueFalse') {
+        quizQuestionBank['tfQuestions'].push(this);
     } else {
-        var questionObj = {};
-        questionObj[quizName] =  {};
-        if (questionType === 'TrueFalse') {
-            questionObj[quizName]['tfQuestions'] = [this];
-        } else {
-            questionObj[quizName]['mcQuestions'] = [];
-        }
-
-        localStorage.setItem('quizBank', JSON.stringify(questionObj));
+        quizQuestionBank['mcQuestions'].push(this);
     }
+    localStorage.setItem('quizBank', JSON.stringify(quizBank));
 }
-
-
-var saveQuestionsInBank = function() {
-    new Quiz('HTML');
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-    // new Question('HTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
-
-};
-
-saveQuestionsInBank();
-console.log(localStorage);

@@ -14,32 +14,34 @@
         <label for="quizName">Quiz Name:</label>
         <input name="quizName" type="text" placeholder="Quiz Name..." required />
         <br>
-
-        <label for="questionType">Question Type:</label>
-        <input name="questionType" type="radio" value="True/False" checked> True/False
-        <input name="questionType" type="radio" value="Multiple Choice"> Multiple Choice
-        <br>
+        <section id = "questionTypeSection">
+          <label for="questionType">Question Type:</label>
+          <input name="questionType" type="radio" value="TrueFalse"> True/False
+          <input name="questionType" type="radio" value="MultipleChoice" checked> Multiple Choice
+        </section>
 
         <label for="questionQuestion">Question:</label>
         <input name="questionQuestion" type="text" placeholder="Type question here..." size="40"  required />
-        <br>
-
-        <label for="answer1">Answer 1:</label>
-        <input name="answer1" type="text" placeholder="Type response here..." />
-        <input name="correctAnswer" type="radio" value=0 checked>
-        <br>
-        <label for="answer2">Answer 2:</label>
-        <input name="answer2" type="text" placeholder="Type response here..." />
-        <input name="correctAnswer" type="radio" value=1>
-        <br>
-        <label for="answer3">Answer 3:</label>
-        <input name="answer3" type="text" placeholder="Type response here..." />
-        <input name="correctAnswer" type="radio" value=2>
-        <br>
-        <label for="answer4">Answer 4:</label>
-        <input name="answer4" type="text" placeholder="Type response here..." />
-        <input name="correctAnswer" type="radio" value=3>
-        <br>
+        <br/>
+        &nbsp; <i>Check the button of the response that you want to be the correct answer.</i>
+        <section id="responseSection">
+          <label for="answer1">Answer 1:</label>
+          <input name="answer1" type="text" placeholder="Type response here..." />
+          <input name="correctAnswer" type="radio" value=0 checked>
+          <br>
+          <label for="answer2">Answer 2:</label>
+          <input name="answer2" type="text" placeholder="Type response here..." />
+          <input name="correctAnswer" type="radio" value=1>
+          <br>
+          <label for="answer3">Answer 3:</label>
+          <input name="answer3" type="text" placeholder="Type response here..." />
+          <input name="correctAnswer" type="radio" value=2>
+          <br>
+          <label for="answer4">Answer 4:</label>
+          <input name="answer4" type="text" placeholder="Type response here..." />
+          <input name="correctAnswer" type="radio" value=3>
+          <br>
+        </section>
 
         <button id="new-question">Add New Question</button>
       </fieldset>

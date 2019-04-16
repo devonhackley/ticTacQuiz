@@ -34,6 +34,8 @@ var saveQuestionsInBank = function() {
 saveQuestionsInBank();
 console.log(JSON.parse(localStorage['quizBank']));
 
+var grid = new Grid();
+grid.initializeGrid();
 
 // adding event listeners for the boxes when the DOM content loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // adding boxlistners
 var addBoxListeners = () => {
     for(let i = 0; i < gridSquares.length; i++){
-        gridSquares[i].addEventListener('click', clickhandlefunction());
+        gridSquares[i].addEventListener('click', grid.getCellSelection);
     }
 };
 

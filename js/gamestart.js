@@ -9,11 +9,11 @@ const playerTwoIconO = document.getElementById('playerTwoIconO');
 function populateQuizzes(){
     if(localStorage['quizBank']) {
         let quizzes = JSON.parse(localStorage['quizBank']);
-        quizzes.forEach((quiz) => {
+        for(var key in quizzes) {
             const newEle = document.createElement('option');
-            newEle.textContent = quiz.quizName;
+            newEle.textContent = key;
             gameSelect.appendChild(newEle);
-        });
+        }
     }
 }
 
@@ -22,12 +22,12 @@ function handleGameStartForm(event){
     const p1 = event.target.playerOne.value;
     const p2 = event.target.playerTwo.value;
     const selectedQuiz = gameSelect.options[gameSelect.selectedIndex].text;
-    let player1, player2 = {};
+    let player1 = {};
+    let player2 = {};
 
 
     if (localStorage['playerBank']) { // check to see if players already exist
         const players = JSON.parse(localStorage['playerBank']);
-        console.log(players.includes('Peter'));
         players.forEach((play) => {
             if(play.userName === p1){
                 player1 = play;
@@ -35,6 +35,11 @@ function handleGameStartForm(event){
                 player2 = play;
             }
         });
+        if(!Object.keys(player1).length || !Object.keys(player2).length){
+            //create players
+            player1 = new Player(p1);
+            player2 = new Player(p2);
+        }
 
     } else {
         //create players

@@ -60,3 +60,10 @@ main {
 #game-start {
   margin-top: 50px;
 }
+
+form {
+  float: left;
+}
+#newQuestionForm {
+  display: none;
+}

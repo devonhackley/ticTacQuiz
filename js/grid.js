@@ -26,7 +26,7 @@ Grid.prototype.setUpGrid = function(){
     // for (var i = 0; i < 9; i ++) {
     //     this.cells.push(new Cell());
     // }
-  
+
     // var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
     // //var tfQuestions  = questionBank['tfQuestions'];
     // //console.log(tfQuestions);
@@ -70,13 +70,17 @@ Grid.prototype.keepScore = function(){
             if (playerOneChoices.includes(innerArr[j])) {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerOnePoints++;
-                // TODO: checkWin logic
-                // TODO: checkTie logic
+                // checkWin logic
+                Grid.checkWinConditions();
+                // checkTie logic
+                Grid.checkTie();
             } else if (playerTwoChoices.includes(innerArr[j])) {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerTwoPoints++;
-                // TODO: checkWin logic
-                // TODO: checkTie logic
+                // checkWin logic
+                Grid.checkWinConditions();
+                // checkTie logic
+                Grid.checkTie();
             }
         }
         // zero out the players points if neither player reached 3 points through the check.
@@ -98,8 +102,7 @@ Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
         if (!randomizedArr.includes(randInt)) {
             randomizedArr.push(randInt);
         }
-    } 
-
+    }
     return randomizedArr;
 };
 

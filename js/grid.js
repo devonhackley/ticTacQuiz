@@ -14,39 +14,24 @@ const Cell = function(quizName){
     this.winnerIcon;
 };
 
-const Grid = function(game){
-    this.game = game;
-    this.quizName = game['quizName'];
+const Grid = function(quizName){
+    console.log('grid');
+    this.quizName = quizName;
     this.cells = [];
-    this.initializeGrid();
 };
 
-// sets up grid will cells and cell info
 Grid.prototype.initializeGrid = function(){
-    //create 9 cells for this grid
-    for (var i = 0; i < 9; i ++) {
-        this.cells.push(new Cell());
-    }
+    //first Grid Instance
+    // create 9 cells for this grid
+    // for (var i = 0; i < 9; i ++) {
+    //     this.cells.push(new Cell());
+    // }
 
-    var tfQuestions = this.game.questionBank['tfQuestions'];
-    var mcQuestions = this.game.questionBank['mcQuestions'];
-
-    var tfQuestionsIndicesArray = this.makeArrayofIndices(tfQuestions.length);
-    var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);
-
-    var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
-    var randomTrueFalseIndices = this.randomizeArray(tfQuestionsIndicesArray, 9);
-
-    //add tie breaker question to each cell, and 2 mc questions to each cell
-    var mcIndexTracker = 0;
-    for (var i = 0; i < 9; i++) {
-        this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
-        this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
-        this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
-        mcIndexTracker += 2;
-    }
-
-    console.log('Initialized Grid');
+    // var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
+    // //var tfQuestions  = questionBank['tfQuestions'];
+    // //console.log(tfQuestions);
+    // //var randomMultipleChoiceIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8,9], 9);
+    // var randomTrueFalseIndices = this.randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8], 9);
 };
 
 Grid.prototype.populateGrid = function(bank){
@@ -109,7 +94,6 @@ Grid.prototype.updateGrid = function(){
     console.log('grid has been updated');
 };
 
-// accepts an array and returns a new shuffled array of size randomizedArrayLength
 Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     var randomizedArr = [];
     var randInt;
@@ -123,13 +107,9 @@ Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     return randomizedArr;
 };
 
-//makes a array of indices 0 to arrayLength - 1
-Grid.prototype.makeArrayofIndices = function(arrayLength) {
-    var result = [];
-    for(var i = 0; i < arrayLength; i++) {
-        result.push(i);
-    }
-    return result;
-};
+
+var grid = new Grid();
+grid.initializeGrid();
+
 
 

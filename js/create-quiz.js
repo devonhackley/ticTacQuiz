@@ -10,7 +10,7 @@ function handleNewQuestionSubmit(event) {
     var questionType = event.target.questionType.value;
     var questionQuestion = event.target.questionQuestion.value;
     if (questionType === 'TrueFalse') {
-        var questionResponses = ['true', 'false'];
+        var questionResponses = ['True', 'False'];
     } else {
         questionResponses = [event.target.answer1.value, event.target.answer2.value, event.target.answer3.value, event.target.answer4.value];
         event.target.answer1.value = null;
@@ -18,8 +18,7 @@ function handleNewQuestionSubmit(event) {
         event.target.answer3.value = null;
         event.target.answer4.value = null;
     }
-    var correctAnswer = event.target.correctAnswer.value;
-
+    var correctAnswer = parseInt(event.target.correctAnswer.value);
     event.target.quizName.value = null;
     event.target.questionType.value = null;
     event.target.questionQuestion.value = null;

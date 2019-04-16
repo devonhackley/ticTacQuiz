@@ -13,23 +13,27 @@
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
             <a href="#">How To Play</a>
-            <a href="#">Play Game</a>
-            <a href="#">Create Game</a>
             <a href="#">Leaderboard</a>
         </nav>
     </header>
-    <div>
+    <div id="game-start">
         <h2>Game Info</h2>
         <form action="play.html" id="gameStartForm">
             <label for="playerOneName">Player 1 Name:</label>
-            <input type="text" name="playerOne">
-            <input name="playerOneIcon" type="radio" value="X" checked> X
-            <input name="playerOneIcon" type="radio" value="O"> O
+            <input type="text" name="playerOne" required>
+            <div id="playerOneIcon">
+                <label for="playerOneName">Player 1 Icon:</label>
+                <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked> X
+                <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O"> O
+            </div>
             <br>
             <label for="playerTwoName">Player 2 Name:</label>
-            <input type="text" name="playerTwo">
-            <input name="playerTwoIcon" type="radio" value="X" checked> X
-            <input name="playerTwoIcon" type="radio" value="O"> O
+            <input type="text" name="playerTwo" required>
+            <div id="playerTwoIcon">
+                <label for="playerOneName">Player 2 Icon:</label>
+                <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X"> X
+                <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked> O
+            </div>
             <br>
     
             <label for="quizSelection">Select your Quiz:</label>
@@ -40,5 +44,6 @@
             <input type="submit" id="gameStartFormButton" value="Start Game">
         </form>
     </div>
+    <script src="./js/gamestart.js"></script>
 </body>
 </html>

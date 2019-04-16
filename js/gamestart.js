@@ -5,8 +5,9 @@ const gameStartForm = document.getElementById('gameStartForm');
 const playerOneIconSelector = document.getElementById('playerOneIcon');
 const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
+var newGame;
 
-function populateQuizzes(){
+var populateQuizzes = function(){
     if(localStorage['quizBank']) {
         let quizzes = JSON.parse(localStorage['quizBank']);
         for(var key in quizzes) {
@@ -15,9 +16,9 @@ function populateQuizzes(){
             gameSelect.appendChild(newEle);
         }
     }
-}
+};
 
-function handleGameStartForm(event){
+var handleGameStartForm = function(event){
     // game info
     const p1 = event.target.playerOne.value.toLowerCase();
     const p2 = event.target.playerTwo.value.toLowerCase();
@@ -50,15 +51,15 @@ function handleGameStartForm(event){
         player2 = new Player(p2); // eslint-disable-line
     }
     // create new game from inputs
-    const newGame = new Game(selectedQuiz, player1.userName, player2.userName); // eslint-disable-line
+    newGame = new Game(selectedQuiz, player1, player2); // eslint-disable-line
     //reset form
     gameStartForm.reset();
     // start game
     newGame.playGame();
 
-}
+};
 
-function handleIconSelection(event){ // controls icon selection, so users cannot be the same icon
+var handleIconSelection = function(event){ // controls icon selection, so users cannot be the same icon
     const icon = event.target.value;
     if(icon === 'O'){
         playerTwoIconX.disabled = false;
@@ -71,10 +72,14 @@ function handleIconSelection(event){ // controls icon selection, so users cannot
     }
 }
 
-populateQuizzes();
+if(gameSelect){
+    populateQuizzes();
+    // event listener for game start form
+    gameStartForm.addEventListener('submit', handleGameStartForm);
+    playerOneIconSelector.addEventListener('click', handleIconSelection);
+}
 
-// event listener for game start form
-gameStartForm.addEventListener('submit', handleGameStartForm);
-playerOneIconSelector.addEventListener('click', handleIconSelection);
+
+
 
 

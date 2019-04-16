@@ -9,6 +9,7 @@ const Game = function(quizName, playerOne, playerTwo) {
     // Setup grid
     this.isPlayerOneTurn = true;
     this.grid = new Grid(this);
+    console.log('New game created.');
 };
 
 //gets the question bank from local storage that is associated with this quiz
@@ -29,11 +30,11 @@ Game.prototype.playGame = function(){
     }
 
     // populate grid and populate grid cell with questions  : call from grid.js
-    this.grid.populateGrid(this.questionBank);
+    // this.grid.populateGrid(this.questionBank);
     // Get user cell selection
-    var userCell = this.grid.getCellSelection();
+    // var userCell = this.grid.getCellSelection();
     // Show question in cell: grid.js
-    this.grid.showQuestion(userCell);
+    // this.grid.showQuestion(userCell);
     // handle user selection from question (check to see right or wrong)
     this.handleUserSelection();
     // check win conditions

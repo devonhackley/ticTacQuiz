@@ -3,6 +3,7 @@
 // global variables
 var gridSquares = document.getElementsByClassName('gridSquare');
 
+
 var saveQuestionsInBank = function() {
     new Quiz('TEST');
     new Question('TEST', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
@@ -98,3 +99,5 @@ var removeBoxListeners = () => {
         gridSquares[i].removeEventListener();
     }
 };
+
+

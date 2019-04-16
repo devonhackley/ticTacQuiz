@@ -7,9 +7,8 @@ const Game = function(quizName, playerOne, playerTwo) {
     this.playerTwo = playerTwo;
     this.questionBank = this.getQuestionBank();
     // Setup grid
-    this.grid = new Grid(quizName);
-    this.grid.initializeGrid();
     this.isPlayerOneTurn = true;
+    this.grid = new Grid(this);
 };
 
 //gets the question bank from local storage that is associated with this quiz
@@ -52,3 +51,5 @@ Game.prototype.switchTurns = function(){
 Game.prototype.handleUserSelection = function(){
 
 };
+
+var game = new Game('TEST', 'player1', 'player2');

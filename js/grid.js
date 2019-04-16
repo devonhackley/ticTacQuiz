@@ -1,5 +1,5 @@
 'use strict';
-var winConditions = [[1,2,3],[1,4,7],[1,5,9],[2,5,8],[3,6,9],[4,5,6],[7,8,9],[3,5,7]];
+var winConditions = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[2,5,8],[3,4,5],[6,7,8],[2,4,6]];
 // track the choices each player makes
 var playerOneChoices = [];
 var playerTwoChoices = [];
@@ -14,24 +14,39 @@ const Cell = function(quizName){
     this.winnerIcon;
 };
 
-const Grid = function(quizName){
-    console.log('grid');
-    this.quizName = quizName;
+const Grid = function(game){
+    this.game = game;
+    this.quizName = game['quizName'];
     this.cells = [];
+    this.initializeGrid();
 };
 
+// sets up grid will cells and cell info
 Grid.prototype.initializeGrid = function(){
-    //first Grid Instance
-    // create 9 cells for this grid
-    // for (var i = 0; i < 9; i ++) {
-    //     this.cells.push(new Cell());
-    // }
+    //create 9 cells for this grid
+    for (var i = 0; i < 9; i ++) {
+        this.cells.push(new Cell());
+    }
 
-    // var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
-    // //var tfQuestions  = questionBank['tfQuestions'];
-    // //console.log(tfQuestions);
-    // //var randomMultipleChoiceIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8,9], 9);
-    // var randomTrueFalseIndices = this.randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8], 9);
+    var tfQuestions = this.game.questionBank['tfQuestions'];
+    var mcQuestions = this.game.questionBank['mcQuestions'];
+
+    var tfQuestionsIndicesArray = this.makeArrayofIndices(tfQuestions.length);
+    var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);
+
+    var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
+    var randomTrueFalseIndices = this.randomizeArray(tfQuestionsIndicesArray, 9);
+
+    //add tie breaker question to each cell, and 2 mc questions to each cell
+    var mcIndexTracker = 0;
+    for (var i = 0; i < 9; i++) {
+        this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
+        this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
+        this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
+        mcIndexTracker += 2;
+    }
+
+    console.log('Initialized Grid');
 };
 
 Grid.prototype.populateGrid = function(bank){
@@ -42,7 +57,8 @@ Grid.prototype.showQuestion = function(index){
     console.log('question has been shown', index);
 };
 
-Grid.prototype.getCellSelection = function(){
+Grid.prototype.getCellSelection = function(e){
+    console.log(e.target.id);
     console.log('selected cell');
     return 0;
 };
@@ -71,16 +87,16 @@ Grid.prototype.keepScore = function(){
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerOnePoints++;
                 // checkWin logic
-                Grid.checkWinConditions();
+                this.checkWinConditions();
                 // checkTie logic
-                Grid.checkTie();
+                this.checkTie();
             } else if (playerTwoChoices.includes(innerArr[j])) {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerTwoPoints++;
                 // checkWin logic
-                Grid.checkWinConditions();
+                this.checkWinConditions();
                 // checkTie logic
-                Grid.checkTie();
+                this.checkTie();
             }
         }
         // zero out the players points if neither player reached 3 points through the check.
@@ -93,6 +109,7 @@ Grid.prototype.updateGrid = function(){
     console.log('grid has been updated');
 };
 
+// accepts an array and returns a new shuffled array of size randomizedArrayLength
 Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     var randomizedArr = [];
     var randInt;
@@ -106,9 +123,13 @@ Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     return randomizedArr;
 };
 
-
-var grid = new Grid();
-grid.initializeGrid();
-
+//makes a array of indices 0 to arrayLength - 1
+Grid.prototype.makeArrayofIndices = function(arrayLength) {
+    var result = [];
+    for(var i = 0; i < arrayLength; i++) {
+        result.push(i);
+    }
+    return result;
+};
 
 

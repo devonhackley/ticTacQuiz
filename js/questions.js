@@ -3,7 +3,7 @@ var questionBank = [];
 
 function Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer) {
     this.quizName = quizName; // Name of quiz this question is associated with.
-    this.questionType = questionType; // Question is either True/False or multiple choice.
+    this.questionType = questionType; // Question is either TrueFalse or MultipleChoice.
     this.questionQuestion = questionQuestion; // String containing statement of question.
     this.questionResponses = questionResponses; // Array of strings containing possible responses.
     this.correctAnswer = correctAnswer; // Value indicating the index in questionResponse array of the correct answer.

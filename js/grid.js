@@ -14,12 +14,14 @@ const Cell = function(quizName){
     this.winnerIcon;
 };
 
-const Grid = function(quizName){
-    console.log('grid');
-    this.quizName = quizName;
+const Grid = function(game){
+    this.game = game;
+    this.quizName = game['quizName'];
     this.cells = [];
+    this.initializeGrid();
 };
 
+// sets up grid will cells and cell info
 Grid.prototype.initializeGrid = function(){
     //create 9 cells for this grid
     for (var i = 0; i < 9; i ++) {
@@ -107,7 +109,7 @@ Grid.prototype.keepScore = function(){
 Grid.prototype.updateGrid = function(){
     console.log('grid has been updated');
 };
-
+// accepts an array and returns a new shuffled array of size randomizedArrayLength
 Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     var randomizedArr = [];
     var randInt;
@@ -119,6 +121,15 @@ Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
         }
     }
     return randomizedArr;
+};
+
+//makes a array of indices 0 to arrayLength - 1
+Grid.prototype.makeArrayofIndices = function(arrayLength) {
+    var result = [];
+    for(var i = 0; i < arrayLength; i++) {
+        result.push(i);
+    }
+    return result;
 };
 
 

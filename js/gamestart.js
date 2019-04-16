@@ -80,3 +80,4 @@ populateQuizzes();
 gameStartForm.addEventListener('submit', handleGameStartForm);
 playerOneIconSelector.addEventListener('click', handleIconSelection);
 
+

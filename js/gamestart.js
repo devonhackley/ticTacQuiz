@@ -51,11 +51,8 @@ function handleGameStartForm(event){
     }
     // create new game from inputs
     const newGame = new Game(selectedQuiz, player1.userName, player2.userName); // eslint-disable-line
-
     //reset form
     gameStartForm.reset();
-
-
     // start game
     newGame.playGame();
 

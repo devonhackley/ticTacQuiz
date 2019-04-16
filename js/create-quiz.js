@@ -1,12 +1,13 @@
 var newQuestionForm = document.getElementById('newQuestionForm');
 var responseSection = document.getElementById('responseSection');
 var questionTypeSection = document.getElementById('questionTypeSection');
+var quizNameSelector = document.getElementById('quizName');
 
 // Event handler for the submission of a new question.
 
 function handleNewQuestionSubmit(event) {
     event.preventDefault();
-    var quizName = event.target.quizName.value;
+    var quizName = quizNameSelector.value;
     var questionType = event.target.questionType.value;
     var questionQuestion = event.target.questionQuestion.value;
     if (questionType === 'TrueFalse') {
@@ -19,7 +20,6 @@ function handleNewQuestionSubmit(event) {
         event.target.answer4.value = null;
     }
     var correctAnswer = parseInt(event.target.correctAnswer.value);
-    event.target.quizName.value = null;
     event.target.questionType.value = null;
     event.target.questionQuestion.value = null;
 
@@ -31,6 +31,7 @@ function handleNewQuestionSubmit(event) {
 
 }
 
+// This function is the event handler for switching between TrueFalse and MultipleChoice type questions.
 function questionTypeHandler(event) {
     responseSection.innerHTML = '';
 
@@ -74,14 +75,31 @@ function questionTypeHandler(event) {
         }
     }
 }
+var quizBank = JSON.parse(localStorage['quizBank']);
+
+function displayCurrentQuiz(event) {
+
+    var currentQuiz = event.target.quizName.value;
+    // var currentQuestions = quizBank. ;
+}
+
+function fillQuizSelector() {
+
+    var optionEl;
+    for (var i = 0 ; i < Object.keys(quizBank).length ; i++) {
+        optionEl = document.createElement('option');
+        optionEl.setAttribute('value', Object.keys(quizBank)[i]);
+        optionEl.textContent = Object.keys(quizBank)[i];
+        quizNameSelector.append(optionEl);
+    }
+
+}
+
+fillQuizSelector();
 
 
 
-
-
-
-
-
+// These are the event listeners for the Question Type selectors and for the Add New Question button. 
 newQuestionForm.addEventListener('submit', handleNewQuestionSubmit);
 questionTypeSection.addEventListener('input', questionTypeHandler);
 

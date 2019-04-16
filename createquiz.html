@@ -20,9 +20,20 @@
 
       <h2></h2>
 
+      <form id="newQuizForm">
+        <fieldset>
+          <legend>+ New Quiz...</legend>
+          <label for="quizName">Quiz Name:</label>
+          <input name="quizName" type="text" placeholder="Type quiz name here..." required />
+          <button id="new-quiz">Add New Quiz</button>
+        </fieldset>
+      </form>
+      </br></br></br></br>
+
       <label for="quizName">Select Quiz Name:</label>
       <select id="quizName">
       </select>
+      <br/>
 
       <form id="newQuestionForm">
         <fieldset>
@@ -62,11 +73,12 @@
 
         </fieldset>
       </form>
-
+      <section id="currentQuiz">
       <ul id="currentQuizQuestions">
+        
 
-
-      </ul>
+        </ul>
+      </section>
     </main>
     <script src="./js/questions.js"></script>
     <script src="./js/player.js"></script>

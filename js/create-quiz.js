@@ -77,29 +77,34 @@ function questionTypeHandler(event) {
 }
 var quizBank = JSON.parse(localStorage['quizBank']);
 
-function displayCurrentQuiz(event) {
+// function displayCurrentQuiz(event) {
 
-    var currentQuiz = event.target.quizName.value;
-    // var currentQuestions = quizBank. ;
-}
+//     var liEl = document.createElement('li');
+//     var currentQuiz = quizNameSelector.value;
+
+//     for (var i = 0 ; i < Object.keys(quizBank[currentQuiz]).length ; i++) {
+
+//     }
+
+
+// var currentQuestions = quizBank. ;
+// }
 
 function fillQuizSelector() {
 
     var optionEl;
+    // Later, include a placeholder option here
     for (var i = 0 ; i < Object.keys(quizBank).length ; i++) {
         optionEl = document.createElement('option');
         optionEl.setAttribute('value', Object.keys(quizBank)[i]);
         optionEl.textContent = Object.keys(quizBank)[i];
         quizNameSelector.append(optionEl);
     }
-
 }
 
-fillQuizSelector();
-
-
-
-// These are the event listeners for the Question Type selectors and for the Add New Question button. 
+// These are the event listeners for the Question Type selectors and for the Add New Question button.
 newQuestionForm.addEventListener('submit', handleNewQuestionSubmit);
 questionTypeSection.addEventListener('input', questionTypeHandler);
 
+// This line fills the Quiz Selector on page load.
+fillQuizSelector();

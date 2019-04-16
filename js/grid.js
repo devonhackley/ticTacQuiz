@@ -1,15 +1,15 @@
 'use strict';
 
 const Cell = function(quizName) {
-    this.quizName = quizName
     this.mcQuestions = [];
     this.tieBreakerQuestion = [];
     this.winner;
     this.winnerIcon;
 };
 
-const Grid = function(){
+const Grid = function(quizName){
     console.log('grid');
+    this.quizName = quizName
     this.cells = [];
 };
 

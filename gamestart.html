@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tic Tac Quiz</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="#">How To Play</a>
+            <a href="#">Leaderboard</a>
+        </nav>
+    </header>
+    <div id="game-start">
+        <h2>Game Info</h2>
+        <form action="play.html" id="gameStartForm">
+            <label for="playerOneName">Player 1 Name:</label>
+            <input type="text" name="playerOne" required>
+            <div id="playerOneIcon">
+                <label for="playerOneName">Player 1 Icon:</label>
+                <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked> X
+                <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O"> O
+            </div>
+            <br>
+            <label for="playerTwoName">Player 2 Name:</label>
+            <input type="text" name="playerTwo" required>
+            <div id="playerTwoIcon">
+                <label for="playerOneName">Player 2 Icon:</label>
+                <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X"> X
+                <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked> O
+            </div>
+            <br>
+    
+            <label for="quizSelection">Select your Quiz:</label>
+            <select id="questionsSelection">
+                <option value="default" selected>Default</option>
+            </select>
+    
+            <input type="submit" id="gameStartFormButton" value="Start Game">
+        </form>
+    </div>
+    <script src="./js/gamestart.js"></script>
+</body>
+</html>

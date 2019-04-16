@@ -43,7 +43,7 @@ Grid.prototype.initializeGrid = function(){
         this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
         this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
         this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
-        mcIndexTracker += 2; 
+        mcIndexTracker += 2;
     }
 
     console.log('Initialized Grid');

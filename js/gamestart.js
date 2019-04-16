@@ -18,27 +18,42 @@ function populateQuizzes(){
 }
 
 function handleGameStartForm(event){
-    event.preventDefault();
     // game info
     const p1 = event.target.playerOne.value;
     const p2 = event.target.playerTwo.value;
     const selectedQuiz = gameSelect.options[gameSelect.selectedIndex].text;
+    let player1, player2 = {};
 
 
-    //create players
-    const player1 = new Player(p1);
-    const player2 = new Player(p2);
+    if (localStorage['playerBank']) { // check to see if players already exist
+        const players = JSON.parse(localStorage['playerBank']);
+        console.log(players.includes('Peter'));
+        players.forEach((play) => {
+            if(play.userName === p1){
+                player1 = play;
+            } else if (play.userName === p2){
+                player2 = play;
+            }
+        });
+
+    } else {
+        //create players
+        player1 = new Player(p1);
+        player2 = new Player(p2);
+    }
     // create new game from inputs
     const newGame = new Game(selectedQuiz, player1.userName, player2.userName);
+
+    //reset form
+    gameStartForm.reset();
+
 
     // start game
     newGame.playGame();
 
-    //reset form
-    gameStartForm.reset();
 }
 
-function handleIconSelection(event){
+function handleIconSelection(event){ // controls icon selection, so users cannot be the same icon
     const icon = event.target.value;
     if(icon === 'O'){
         playerTwoIconX.disabled = false;

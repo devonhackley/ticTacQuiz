@@ -7,7 +7,7 @@ var playerTwoChoices = [];
 var playerOnePoints = 0;
 var playerTwoPoints = 0;
 
-const Cell = function(quizName) {
+const Cell = function(quizName){
     this.mcQuestions = [];
     this.tieBreakerQuestion = [];
     this.winner;
@@ -16,11 +16,11 @@ const Cell = function(quizName) {
 
 const Grid = function(quizName){
     console.log('grid');
-    this.quizName = quizName
+    this.quizName = quizName;
     this.cells = [];
 };
 
-Grid.prototype.setUpGrid = function(){
+Grid.prototype.initializeGrid = function(){
     //first Grid Instance
     // create 9 cells for this grid
     // for (var i = 0; i < 9; i ++) {

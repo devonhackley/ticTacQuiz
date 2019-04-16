@@ -1,24 +1,23 @@
 'use strict';
 
 // Constructior for Game instances
-const Game = function(quiz, playerOne, playerTwo) {
-    this.quiz = quiz;
+const Game = function(quizName, playerOne, playerTwo) {
+    this.quizName = quizName;
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
-    this.questionBank = this.createQuestionBank();
+    this.questionBank = this.getQuestionBank();
     // Setup grid
-    this.grid = new Grid(quiz);
-    this.grid.setUpGrid();
+    this.grid = new Grid(quizName);
+    this.grid.initializeGrid();
     this.isPlayerOneTurn = true;
 };
 
-Game.prototype.createQuestionBank = function(){
-    if(localStorage['quiz']) {
-        return JSON.parse(localStorage['quiz']);
-    } else {
-        console.log('No local storage');
-        return;
-    }
+//gets the question bank from local storage that is associated with this quiz
+Game.prototype.getQuestionBank = function(){
+    //since quizName is guaranteed to be in localStorage do not verify
+    var quizBank = JSON.parse(localStorage['quizBank']);
+    var questions = quizBank[this.quizName];
+    return questions;
 };
 
 Game.prototype.playGame = function(){
@@ -53,4 +52,3 @@ Game.prototype.switchTurns = function(){
 Game.prototype.handleUserSelection = function(){
 
 };
-

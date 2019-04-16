@@ -51,5 +51,3 @@ Game.prototype.switchTurns = function(){
 Game.prototype.handleUserSelection = function(){
 
 };
-
-var game = new Game('TEST', 'player1', 'player2');

@@ -21,17 +21,31 @@ const Grid = function(quizName){
 };
 
 Grid.prototype.initializeGrid = function(){
-    //first Grid Instance
-    // create 9 cells for this grid
-    // for (var i = 0; i < 9; i ++) {
-    //     this.cells.push(new Cell());
-    // }
+    //create 9 cells for this grid
+    for (var i = 0; i < 9; i ++) {
+        this.cells.push(new Cell());
+    }
 
-    // var questionBank = JSON.parse(localStorage['questionBank'])[this.quizName];
-    // //var tfQuestions  = questionBank['tfQuestions'];
-    // //console.log(tfQuestions);
-    // //var randomMultipleChoiceIndices = randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8,9], 9);
-    // var randomTrueFalseIndices = this.randomizeArray([0, 1, 2, 3, 4, 5 , 6, 7, 8], 9);
+    var tfQuestions = this.game.questionBank['tfQuestions'];
+    var mcQuestions = this.game.questionBank['mcQuestions'];
+
+    var tfQuestionsIndicesArray = this.makeArrayofIndices(tfQuestions.length);
+    var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);
+
+    //create arrays of randomized indices for true/false and mutltiple choice questions
+    var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
+    var randomTrueFalseIndices = this.randomizeArray(tfQuestionsIndicesArray, 9);
+
+    //add tie breaker question to each cell, and 2 mc questions to each cell
+    var mcIndexTracker = 0;
+    for (var i = 0; i < 9; i++) {
+        this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
+        this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
+        this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
+        mcIndexTracker += 2;
+    }
+
+    console.log('Initialized Grid');
 };
 
 Grid.prototype.populateGrid = function(bank){

@@ -2,6 +2,9 @@
 'use strict';
 // global variables
 var gridSquares = document.getElementsByClassName('gridSquare');
+if (!localStorage['games']){
+    localStorage.setItem('games', JSON.stringify([]));
+}
 
 
 var saveQuestionsInBank = function() {

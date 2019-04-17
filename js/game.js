@@ -1,5 +1,4 @@
 'use strict';
-
 // Constructior for Game instances
 const Game = function(quizName, playerOne, playerTwo) {
     this.quizName = quizName;

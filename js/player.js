@@ -22,9 +22,13 @@ function Player(userName, icon) {
 if(localStorage['playerBank']){
     playerBank = JSON.parse(localStorage['playerBank']);
 } else {
-    new Player('Peter');
-    new Player('Paolo');
-    new Player('Tisha');
-    new Player('Devon');
+    var peter = new Player('Peter');
+    peter.numWins = 5; // for leaderboard
+    var paolo = new Player('Paolo');
+    paolo.numWins = 3; // for leaderboard
+    var tisha = new Player('Tisha');
+    tisha.numWins = 10; // for leaderboard
+    var devon = new Player('Devon');
+    devon.numWins = 2; // for leaderboard
     updateLocalStorage('playerBank', playerBank);
 }

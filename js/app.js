@@ -157,13 +157,15 @@ var clickHandler = (e, thisGame) => {
 
     //get the cell data for the grid cell index of index of cell clicked on front end
     var cellData = thisGame.grid.cells[cellIndex];
-    console.log(cellData);
+    // console.log(cellData);
 
     //check for question
     var question;
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
-        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
+        showQuestionForm(question);
+        // showTieBreakerQuestion(cellData);
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
         // get MC Form
         // show mcQuestion in question area
@@ -172,7 +174,8 @@ var clickHandler = (e, thisGame) => {
 
     } else {
         //tie breaker
-        question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
+        showQuestionForm(question);
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
         // get TF Question Form
         // show TF Question in TF Question form in Question area
@@ -190,8 +193,33 @@ var clickHandler = (e, thisGame) => {
 };
 
 // function to populate a form for the question when a square is clicked.
-var showQuestion = () => {
-
+var showQuestionForm = function(question) {
+    let questionToAsk = question.questionQuestion;
+    let questionResponse = question.questionResponses;
+    let questionShowForm = document.getElementById('questionShowForm');
+    let elLabel = document.createElement('label');
+    let br = document.createElement('br');
+    let elSubmit = document.createElement('input');
+    elLabel.innerHTML = questionToAsk;
+    elLabel.setAttribute('for', 'questionResponses');
+    questionShowForm.appendChild(elLabel);
+    questionShowForm.appendChild(br);
+    for(let i = 0; i < questionResponse.length; i++){
+        let br = document.createElement('br');
+        let radioLabel = document.createElement('label');
+        let elRadio = document.createElement('input');
+        radioLabel.setAttribute('for', 'qestionResponses');
+        radioLabel.innerHTML = questionResponse[i];
+        elRadio.setAttribute('type', 'radio');
+        elRadio.setAttribute('name', 'questionResponses');
+        elRadio.setAttribute('value', questionResponse[i]);
+        questionShowForm.appendChild(elRadio);
+        questionShowForm.appendChild(radioLabel);
+        questionShowForm.appendChild(br);
+    }
+    elSubmit.setAttribute('type', 'submit');
+    elSubmit.setAttribute('value', 'Submit Answer');
+    questionShowForm.appendChild(elSubmit);
 };
 
 var checkWinConditions = () => {
@@ -248,8 +276,5 @@ var removeBoxListeners = () => {
     }
 };
 
-var showQuestionForm = function() {
-    console.log('question form is is displayed');
-};
 
 

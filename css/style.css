@@ -67,3 +67,25 @@ form {
 #newQuestionForm {
   display: none;
 }
+
+#leaderboard {
+  width: 90%;
+  margin: 90px auto;
+
+
+}
+#leaderboard-container li{
+  width: 100%;
+}
+#leaderboard-container li span {
+  float: left;
+  width: 30%;
+}
+#leaderboard-container li span:first-child{
+  margin-left: 10px;
+}
+#leaderboard-container span span:after {
+  content: "";
+  display: table;
+  clear: both;
+}

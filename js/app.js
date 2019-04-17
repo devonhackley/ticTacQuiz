@@ -10,11 +10,13 @@ var playerOnePoints = 0;
 var playerTwoPoints = 0;
 
 var gridSquares = document.getElementsByClassName('gridSquare');
+var questionBox = document.getElementById('question');
+var userResponseButton = document.getElementById('user-response-button');
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
 }
 
-var saveQuestionsInBank = function() {
+var saveTestQuestionsInBank = function() {
     new Quiz('TEST');
     new Question('TEST', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
 
@@ -79,8 +81,48 @@ var saveQuestionsInBank = function() {
     new Question('TESTHTML', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
 };
 
-saveQuestionsInBank();
+saveTestQuestionsInBank();
 console.log('Test Question Bank Saved');
+
+var saveDefaultQuestionsInBank = function() {
+    new Quiz('DEFAULT');
+
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, what tag is used for indicating superscript?', ['<superscript>', '<super>', '<sup>', '<script^>'], 2);
+    new Question('DEFAULT', 'MultipleChoice', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
+    new Question('DEFAULT', 'MultipleChoice', 'What symbol would you use in front of a CSS selector to target a class attribute?', ['#', '.', '>', '[class]'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'Which of the following is NOT a data type in JavaScript?', ['number', 'string', 'variable', 'boolean'], 2);
+    new Question('DEFAULT', 'MultipleChoice', 'How would you access the 3rd element in the array \'fruits\'? ', ['fruits[3]', 'fruits{2}', 'fruits(3)', 'fruits[2]'], 3);
+
+    new Question('DEFAULT', 'MultipleChoice', 'Which of the following is not a type of list in HTML?', ['numbered', 'ordered', 'unordered', 'definition'], 0);
+    new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, which of the following is NOT an arithmetic operator?', ['/', 'x', '+', '-'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In Javascript, what do you call information that is passed to a function as inputs?', ['variables', 'values', 'parameters', 'statements'], 2);
+    new Question('DEFAULT', 'MultipleChoice', 'In CSS, which of the following is NOT a position value?', ['relative', 'absolute', 'fixed', 'float'], 3);
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, which tag would you use to create a hyperlink?', ['<a>', '<link>', '<hlink>', '<src>'], 0);
+
+    new Question('DEFAULT', 'MultipleChoice', 'What does HTML stand for?', ['Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Hyper Text Markup Language', 'Hyper Tools Markup Language'], 2);
+    new Question('DEFAULT', 'MultipleChoice', 'What does CSS stand for?', ['Code Style Studio', 'Cascading Style Sheets', 'Cool Stylish Suffering', 'Can\'t Style Sh*t'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, which tag is used to add an image to a web page?', ['<image>', '<a>', '<img>', '<pic>']);
+    new Question('DEFAULT', 'MultipleChoice', 'From outside in, what is the order of the CSS Box Model?', ['Content, Margin, Border, Padding', 'Margin, Border, Padding, Content', 'Margin, Padding, Border, Content', 'Border, Margin, Padding, Content'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In CSS, you can select a color by using:', ['RGB value', 'Hex value', 'Name of the color', 'All of the above'], 3);
+
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, which of the following is not an input type?', ['radio', 'input', 'text', 'submit'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, how can you find the number of properties in an object \'objectName\'?', ['objectName.length', 'Object.keys(objectName).length', 'lengthOf(objectName)', 'objectName.properties.howMany'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, which of the following is NOT a standard error type?', ['Syntax error', 'Type error', 'Range error', 'Format error'], 3);
+
+    new Question('DEFAULT', 'TrueFalse', 'In JavaScript, a variable name can begin with a number.', ['True', 'False'], 1);
+    new Question('DEFAULT', 'TrueFalse', 'It is possible to link 2 or more style sheets to a single HTML document.', ['True', 'False'], 0);
+    new Question('DEFAULT', 'TrueFalse', 'JavaScript and Java are the same programming language.', ['True', 'False'], 1);
+    new Question('DEFAULT', 'TrueFalse', 'In Javascript if you do not know exactly how many times a code should be run, you can use a while loop.', ['True', 'False'], 0);
+    new Question('DEFAULT', 'TrueFalse', 'In Javascript, a while loop is a special type of for loop.', ['True', 'False'], 1);
+
+    new Question('DEFAULT', 'TrueFalse', 'What would be the boolean value of the statement (5 < 4 || 12 > 10)?', ['True', 'False'], 0);
+    new Question('DEFAULT', 'TrueFalse', 'Pair programming is more likely to produce bugs than writing code individually.', ['True', 'False'], 1);
+    new Question('DEFAULT', 'TrueFalse', 'In JavaScript, a variable declared inside of a function is a global variable.', ['True', 'False'], 1);
+    new Question('DEFAULT', 'TrueFalse', 'In JavaScript, objects are made up of properties and methods.', ['True', 'False'], 0);
+};
+
+saveDefaultQuestionsInBank();
+
 
 
 // adding event listeners for the boxes when the DOM content loads
@@ -161,24 +203,46 @@ var clickHandler = (e, thisGame) => {
 
     //check for question
     var question;
+    var response;
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
         question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
+<<<<<<< HEAD
         showQuestionForm(question);
         // showTieBreakerQuestion(cellData);
+=======
+>>>>>>> bc0b63854b0442319ec64757f2be07181805d142
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
+
         // get MC Form
         // show mcQuestion in question area
-        // get data from user input
-        //if active player is correct, cell winner is active player
+        showQuestionForm(question.questionQuestion);
+
+        //add event listener to form submit button
+        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        // console.log(response);
+        // // get data from user input
+        // //if active player is correct, cell winner is active player
 
     } else {
         //tie breaker
+<<<<<<< HEAD
         question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
         showQuestionForm(question);
+=======
+        question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
+        
+        
+>>>>>>> bc0b63854b0442319ec64757f2be07181805d142
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
         // get TF Question Form
-        // show TF Question in TF Question form in Question area
+        // show mcQuestion in question area
+        showQuestionForm(question.questionQuestion);
+
+        //add event listener to form submit button
+        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        console.log(response);
+
         // get data from user input
         //if active player is correct, cell winner is active player
         //else cell winner is inactive player
@@ -192,6 +256,7 @@ var clickHandler = (e, thisGame) => {
     // LOOP UNTIL GAME ENDS
 };
 
+<<<<<<< HEAD
 // function to populate a form for the question when a square is clicked.
 var showQuestionForm = function(question) {
     let questionToAsk = question.questionQuestion;
@@ -221,6 +286,8 @@ var showQuestionForm = function(question) {
     elSubmit.setAttribute('value', 'Submit Answer');
     questionShowForm.appendChild(elSubmit);
 };
+=======
+>>>>>>> bc0b63854b0442319ec64757f2be07181805d142
 
 var checkWinConditions = () => {
     if (playerOnePoints === 3) {
@@ -274,6 +341,23 @@ var removeBoxListeners = () => {
     for(let i = 0; i < gridSquares.length; i++) {
         gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
     }
+};
+
+<<<<<<< HEAD
+=======
+// function to populate a form for the question when a square is clicked.
+var showQuestionForm = function(ques) {
+    console.log(ques);
+    var pEl = document.createElement('p');
+    pEl.textContent = ques.toString();
+    questionBox.appendChild(pEl);
+    console.log('question form is is displayed');
+};
+>>>>>>> bc0b63854b0442319ec64757f2be07181805d142
+
+var handleQuestionResponse = (e, cellData) => {
+    e.preventDefault();
+    var response = parseInt(e.target.previousElementSibling.value);
 };
 
 

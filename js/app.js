@@ -10,6 +10,8 @@ var playerOnePoints = 0;
 var playerTwoPoints = 0;
 
 var gridSquares = document.getElementsByClassName('gridSquare');
+var questionBox = document.getElementById('question');
+var userResponseButton = document.getElementById('user-response-button');
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
 }
@@ -201,21 +203,36 @@ var clickHandler = (e, thisGame) => {
 
     //check for question
     var question;
+    var response;
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
-        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
+
         // get MC Form
         // show mcQuestion in question area
-        // get data from user input
-        //if active player is correct, cell winner is active player
+        showQuestionForm(question.questionQuestion);
+
+        //add event listener to form submit button
+        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        // console.log(response);
+        // // get data from user input
+        // //if active player is correct, cell winner is active player
 
     } else {
         //tie breaker
-        question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
+        
+        
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
         // get TF Question Form
-        // show TF Question in TF Question form in Question area
+        // show mcQuestion in question area
+        showQuestionForm(question.questionQuestion);
+
+        //add event listener to form submit button
+        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        console.log(response);
+
         // get data from user input
         //if active player is correct, cell winner is active player
         //else cell winner is inactive player
@@ -229,10 +246,6 @@ var clickHandler = (e, thisGame) => {
     // LOOP UNTIL GAME ENDS
 };
 
-// function to populate a form for the question when a square is clicked.
-var showQuestion = () => {
-
-};
 
 var checkWinConditions = () => {
     if (playerOnePoints === 3) {
@@ -288,8 +301,19 @@ var removeBoxListeners = () => {
     }
 };
 
-var showQuestionForm = function() {
+// function to populate a form for the question when a square is clicked.
+var showQuestionForm = function(ques) {
+    console.log(ques);
+    var pEl = document.createElement('p');
+    pEl.textContent = ques.toString();
+    questionBox.appendChild(pEl);
     console.log('question form is is displayed');
 };
+
+var handleQuestionResponse = (e, cellData) => {
+    e.preventDefault();
+    var response = parseInt(e.target.previousElementSibling.value);
+};
+
 
 

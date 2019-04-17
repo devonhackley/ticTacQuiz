@@ -40,7 +40,7 @@ main {
 /******************* Grid CSS *****************/
 #grid {
   width: 600px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   position: absolute;
 }
 

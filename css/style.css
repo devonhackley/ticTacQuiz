@@ -67,3 +67,29 @@ form {
 #newQuestionForm {
   display: none;
 }
+
+#leaderboard {
+  width: 90%;
+  margin: 90px auto;
+}
+
+table{
+  border-spacing: 0;
+  width: 80%;
+  height: 500px;
+  margin: 0px auto;
+}
+
+tr:first-child{
+  background-color: #ccc;
+}
+
+th, td{
+  margin: 0;
+  padding: .5em 1.5em;
+  text-align: center;
+  border-width: 1px 0;
+  border-color: #000;
+  border-style: solid;
+}
+

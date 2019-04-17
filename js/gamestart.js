@@ -53,9 +53,6 @@ var handleGameStartForm = function(event){
     }
     // create new game from inputs
     createGame(selectedQuiz, player1, player2);
-    // start game
-    // newGame.playGame();
-
 };
 
 function createGame(quiz, play1, play2){

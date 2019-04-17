@@ -22,12 +22,6 @@ Game.prototype.getQuestionBank = function(){
 
 Game.prototype.playGame = function(){
     // figure out whose turn it is(active player)
-    let activePlayer = '';
-    if(this.isPlayerOneTurn) {
-        activePlayer = this.playerOne;
-    } else {
-        activePlayer = this.playerTwo;
-    }
 
     // populate grid and populate grid cell with questions  : call from grid.js
     // this.grid.populateGrid(this.questionBank);
@@ -47,10 +41,6 @@ Game.prototype.playGame = function(){
 
 Game.prototype.switchTurns = function(){
     this.isPlayerOneTurn = !this.isPlayerOneTurn;
-};
-
-Game.prototype.handleUserSelection = function(){
-
 };
 
 Game.prototype.calcGameId = function() {

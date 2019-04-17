@@ -207,41 +207,39 @@ var clickHandler = (e, thisGame) => {
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
         question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
-<<<<<<< HEAD
         showQuestionForm(question);
         // showTieBreakerQuestion(cellData);
-=======
->>>>>>> bc0b63854b0442319ec64757f2be07181805d142
+
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
 
         // get MC Form
         // show mcQuestion in question area
-        showQuestionForm(question.questionQuestion);
 
         //add event listener to form submit button
-        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        if(userResponseButton){
+            userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData));
+        }
         // console.log(response);
         // // get data from user input
         // //if active player is correct, cell winner is active player
 
     } else {
         //tie breaker
-<<<<<<< HEAD
-        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
-        showQuestionForm(question);
-=======
+
         question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
-        
-        
->>>>>>> bc0b63854b0442319ec64757f2be07181805d142
+        showQuestionForm(question);
+
+
+
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
+
         // get TF Question Form
         // show mcQuestion in question area
-        showQuestionForm(question.questionQuestion);
 
         //add event listener to form submit button
-        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
-        console.log(response);
+        if(userResponseButton){
+            userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        }
 
         // get data from user input
         //if active player is correct, cell winner is active player
@@ -256,7 +254,6 @@ var clickHandler = (e, thisGame) => {
     // LOOP UNTIL GAME ENDS
 };
 
-<<<<<<< HEAD
 // function to populate a form for the question when a square is clicked.
 var showQuestionForm = function(question) {
     let questionToAsk = question.questionQuestion;
@@ -264,7 +261,7 @@ var showQuestionForm = function(question) {
     let questionShowForm = document.getElementById('questionShowForm');
     let elLabel = document.createElement('label');
     let br = document.createElement('br');
-    let elSubmit = document.createElement('input');
+    let elSubmit = document.createElement('button');
     elLabel.innerHTML = questionToAsk;
     elLabel.setAttribute('for', 'questionResponses');
     questionShowForm.appendChild(elLabel);
@@ -282,12 +279,12 @@ var showQuestionForm = function(question) {
         questionShowForm.appendChild(radioLabel);
         questionShowForm.appendChild(br);
     }
-    elSubmit.setAttribute('type', 'submit');
-    elSubmit.setAttribute('value', 'Submit Answer');
+    elSubmit.setAttribute('id', 'user-response-button');
+    elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
+
 };
-=======
->>>>>>> bc0b63854b0442319ec64757f2be07181805d142
+
 
 var checkWinConditions = () => {
     if (playerOnePoints === 3) {
@@ -343,21 +340,10 @@ var removeBoxListeners = () => {
     }
 };
 
-<<<<<<< HEAD
-=======
-// function to populate a form for the question when a square is clicked.
-var showQuestionForm = function(ques) {
-    console.log(ques);
-    var pEl = document.createElement('p');
-    pEl.textContent = ques.toString();
-    questionBox.appendChild(pEl);
-    console.log('question form is is displayed');
-};
->>>>>>> bc0b63854b0442319ec64757f2be07181805d142
-
 var handleQuestionResponse = (e, cellData) => {
     e.preventDefault();
-    var response = parseInt(e.target.previousElementSibling.value);
+    console.log('Handling question response');
+    // var response = parseInt(e.target.previousElementSibling.value);
 };
 
 

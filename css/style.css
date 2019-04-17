@@ -49,6 +49,15 @@ main {
   float: left;
 }
 
+#grid div i {
+  font-size: 75px;
+  display: block;
+  text-align: center;
+  margin-top: 75px;
+  color: white;
+
+}
+
 #grid div:nth-child(2n) {
   background: blue;
 }

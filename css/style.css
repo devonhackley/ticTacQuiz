@@ -81,13 +81,13 @@ main {
 form {
   float: left;
 }
-#newQuestionForm {
+#newQuestionForm , #currentQuizSection {
   display: none;
 }
 
-/* #currentQuiz {
+#currentQuiz {
   float: right;
-} */
+}
 
 #leaderboard {
   width: 90%;

@@ -9,6 +9,9 @@
 }
 body {
   background-color: #3F0E40;
+  background-image: url('../assets/tictac.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #game-title {
   font-family: 'Luckiest Guy', cursive;
@@ -40,6 +43,10 @@ body {
 }
 form button:hover{
   background: #00FF00;
+  color: rgb(50, 10, 51);
+}
+form button:focus{
+  outline: none;
 }
 
 h3 {
@@ -58,6 +65,8 @@ footer {
   background-color: rgb(38,0,39);
   color: white;
   text-align: center;
+  font-family: 'Galindo', cursive;
+  padding: 3px;
 }
 
 header {

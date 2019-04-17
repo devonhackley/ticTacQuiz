@@ -199,7 +199,7 @@ var clickHandler = (e, thisGame) => {
 
     //get the cell data for the grid cell index of index of cell clicked on front end
     var cellData = thisGame.grid.cells[cellIndex];
-    console.log(cellData);
+    // console.log(cellData);
 
     //check for question
     var question;
@@ -207,31 +207,39 @@ var clickHandler = (e, thisGame) => {
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
         question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
+        showQuestionForm(question);
+        // showTieBreakerQuestion(cellData);
+
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
 
         // get MC Form
         // show mcQuestion in question area
-        showQuestionForm(question.questionQuestion);
 
         //add event listener to form submit button
-        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        if(userResponseButton){
+            userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData));
+        }
         // console.log(response);
         // // get data from user input
         // //if active player is correct, cell winner is active player
 
     } else {
         //tie breaker
+
         question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
-        
-        
+        showQuestionForm(question);
+
+
+
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
+
         // get TF Question Form
         // show mcQuestion in question area
-        showQuestionForm(question.questionQuestion);
 
         //add event listener to form submit button
-        userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
-        console.log(response);
+        if(userResponseButton){
+            userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+        }
 
         // get data from user input
         //if active player is correct, cell winner is active player
@@ -244,6 +252,37 @@ var clickHandler = (e, thisGame) => {
     //replace game info in game local storage and save
 
     // LOOP UNTIL GAME ENDS
+};
+
+// function to populate a form for the question when a square is clicked.
+var showQuestionForm = function(question) {
+    let questionToAsk = question.questionQuestion;
+    let questionResponse = question.questionResponses;
+    let questionShowForm = document.getElementById('questionShowForm');
+    let elLabel = document.createElement('label');
+    let br = document.createElement('br');
+    let elSubmit = document.createElement('button');
+    elLabel.innerHTML = questionToAsk;
+    elLabel.setAttribute('for', 'questionResponses');
+    questionShowForm.appendChild(elLabel);
+    questionShowForm.appendChild(br);
+    for(let i = 0; i < questionResponse.length; i++){
+        let br = document.createElement('br');
+        let radioLabel = document.createElement('label');
+        let elRadio = document.createElement('input');
+        radioLabel.setAttribute('for', 'qestionResponses');
+        radioLabel.innerHTML = questionResponse[i];
+        elRadio.setAttribute('type', 'radio');
+        elRadio.setAttribute('name', 'questionResponses');
+        elRadio.setAttribute('value', questionResponse[i]);
+        questionShowForm.appendChild(elRadio);
+        questionShowForm.appendChild(radioLabel);
+        questionShowForm.appendChild(br);
+    }
+    elSubmit.setAttribute('id', 'user-response-button');
+    elSubmit.textContent = 'Submit Answer';
+    questionShowForm.appendChild(elSubmit);
+
 };
 
 
@@ -301,18 +340,10 @@ var removeBoxListeners = () => {
     }
 };
 
-// function to populate a form for the question when a square is clicked.
-var showQuestionForm = function(ques) {
-    console.log(ques);
-    var pEl = document.createElement('p');
-    pEl.textContent = ques.toString();
-    questionBox.appendChild(pEl);
-    console.log('question form is is displayed');
-};
-
 var handleQuestionResponse = (e, cellData) => {
     e.preventDefault();
-    var response = parseInt(e.target.previousElementSibling.value);
+    console.log('Handling question response');
+    // var response = parseInt(e.target.previousElementSibling.value);
 };
 
 

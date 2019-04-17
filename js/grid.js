@@ -50,10 +50,6 @@ Grid.prototype.initializeGrid = function(questionBank){
     console.log('Initialized Grid');
 };
 
-Grid.prototype.populateGrid = function(bank){
-    console.log('grid has been populated', bank);
-};
-
 Grid.prototype.showQuestion = function(index){
     console.log('question has been shown', index);
 };

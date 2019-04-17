@@ -80,11 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //get the games in localStorage
     var gamesInLocalStorage = JSON.parse(localStorage['games']);
     
-    // this game is always the last game that is saved in local storage
-    var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
+    if(gamesInLocalStorage.length && gridSquares.length) {
+        // this game is always the last game that is saved in local storage
+        var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
+        
+        populateGridIconsOnDom(thisGame);
+        //addBoxListeners(thisGame);
+    } 
     
-    populateGridIconsOnDom(thisGame);
-    //addBoxListeners(thisGame);
 
 });
 

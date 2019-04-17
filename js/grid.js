@@ -29,7 +29,7 @@ Grid.prototype.initializeGrid = function(questionBank){
     var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);
 
     //create arrays of randomized indices for true/false and mutltiple choice questions
-    //var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
+    var randomMultipleChoiceIndices = this.randomizeArray(mcQuestionsIndicesArray, 18);
     var randomTrueFalseIndices = this.randomizeArray(tfQuestionsIndicesArray, 9);
 
     //add tie breaker question to each cell, and 2 mc questions to each cell

@@ -11,7 +11,7 @@ var playerTwoPoints = 0;
 
 var gridSquares = document.getElementsByClassName('gridSquare');
 var questionBox = document.getElementById('question');
-var userResponseButton = document.getElementById('user-response-button');
+var userResponseButton;
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
 }
@@ -168,7 +168,7 @@ var populateGridIconsOnDom = function(thisGame) {
             if(numWins === 9){
                 //TODO
                 //end Game
-                //update player stats
+                stopGame(); // stop game will have the populate results
             }
         }
     }
@@ -179,8 +179,6 @@ var clickHandler = (e, thisGame) => {
     var cellIndex = e.target.id;
     console.log(`The cell with ID ${e.target.id} has been clicked!`);
 
-    //TODO
-    // remove box listeners from all other boxes except cellIndex
 
     //determine active player
     let activePlayer;
@@ -210,6 +208,7 @@ var clickHandler = (e, thisGame) => {
         showQuestionForm(question);
         // showTieBreakerQuestion(cellData);
 
+
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
 
         // get MC Form
@@ -238,7 +237,7 @@ var clickHandler = (e, thisGame) => {
 
         //add event listener to form submit button
         if(userResponseButton){
-            userResponseButton.addEventListener('click', (e) =>handleQuestionResponse(e, cellData));
+            userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData));
         }
 
         // get data from user input
@@ -256,6 +255,8 @@ var clickHandler = (e, thisGame) => {
 
 // function to populate a form for the question when a square is clicked.
 var showQuestionForm = function(question) {
+    let questionDiv = document.getElementById('questionBox');
+    questionDiv.classList.add('showQuestionBox');
     let questionToAsk = question.questionQuestion;
     let questionResponse = question.questionResponses;
     let questionShowForm = document.getElementById('questionShowForm');
@@ -282,6 +283,8 @@ var showQuestionForm = function(question) {
     elSubmit.setAttribute('id', 'user-response-button');
     elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
+    userResponseButton = document.getElementById('user-response-button');
+    console.log(userResponseButton);
 
 };
 
@@ -342,9 +345,25 @@ var removeBoxListeners = () => {
 
 var handleQuestionResponse = (e, cellData) => {
     e.preventDefault();
+    // handle what to do with the response
     console.log('Handling question response');
     // var response = parseInt(e.target.previousElementSibling.value);
 };
 
 
+// end the game
+var stopGame = (winner) => {
+    // save game information in local storage
 
+    // updated player object with a win
+    if(winner){ 
+        playerObject.win++; // placeholder
+    } else if(!winner) {
+        playerObject.tie++; // placeholder
+        console.log('It\'s a tie');
+    }
+
+    // popup for the results message with options that can either take you to a new game or view leaderboards
+
+
+};

@@ -115,7 +115,7 @@ function questionTypeHandler(event) {
 //     }
 
 
-// var currentQuestions = quizBank. ;
+// var currentQuestions = quizBank.
 // }
 
 // This function adds all existing quizzes to the Quiz Selector dropdown menu.

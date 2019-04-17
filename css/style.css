@@ -1,7 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
+@import url('https://fonts.googleapis.com/css?family=Galindo');
+
+
 .profilePic {
   width: 100px;
   height: 100px;
   border-radius: 100px;
+}
+body {
+  background-color: #3F0E40;
+}
+#game-title {
+  font-family: 'Luckiest Guy', cursive;
+  letter-spacing: 3px;
+  color:white;
+  text-shadow:20px 20px 20px rgb(28, 1, 29);
+  font-size: 90px;
+  width: 68%;
+  margin: 80px auto;
+  /* #00FF00; */
+}
+#game-menu {
+  width: 25%;
+  height: 300px;
+  background: #fff;
+  margin: 0 auto;
+}
+#game-menu form {
+  width: 100%;
+  height: 100px;
+  display: block;
+}
+
+#howToPlayButton, #playButton,  #createGameButton {
+  width: 100%;
+  line-height: 96px;
+  font-size: 16px;
+  font-family: 'Galindo', cursive;
+}
+form button:hover{
+  background: #00FF00;
 }
 
 h3 {
@@ -17,7 +55,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(112, 114, 112);
+  background-color: rgb(38,0,39);
   color: white;
   text-align: center;
 }
@@ -27,10 +65,20 @@ header {
   left: 0;
   top: 0;
   width: 100%;
-  background-color: rgb(112, 114, 112);
+  background-color: rgb(38,0,39);
   color: white;
   margin-bottom: 20px;
   padding: 10px;
+}
+header a {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Galindo', cursive;
+  padding: 3px;
+}
+
+header a:hover {
+  color:#00FF00;
 }
 
 main {

@@ -58,34 +58,18 @@ var handleGameStartForm = function(event){
 
 };
 
-/** Retrieved from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#Examples
- * Used because the game object was a circular structure
- */
-const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-        if (typeof value === 'object' && value !== null) {
-            if (seen.has(value)) {
-                return;
-            }
-            seen.add(value);
-        }
-        return value;
-    };
-};
-
 function createGame(quiz, play1, play2){
-    event.preventDefault();
     // create new game from inputs
     newGame = new Game(quiz, play1, play2); // eslint-disable-line
+
+    //initialize grid for the new game
+    newGame.grid.initializeGrid(newGame.questionBank);
+
+    //add game to local storage
     var games = JSON.parse(localStorage['games']);
     games.push(newGame);
-    var gamesToBeSaved = JSON.stringify(games, getCircularReplacer());
+    var gamesToBeSaved = JSON.stringify(games);
     localStorage['games'] = gamesToBeSaved;
-    // start game
-    newGame.playGame();
-    var origin = window.location.origin;
-    window.location.assign(`${origin}/play.html?`);
 }
 
 var handleIconSelection = function(event){ // controls icon selection, so users cannot be the same icon

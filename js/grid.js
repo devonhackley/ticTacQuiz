@@ -7,7 +7,7 @@ var playerTwoChoices = [];
 var playerOnePoints = 0;
 var playerTwoPoints = 0;
 
-const Cell = function(quizName){
+const Cell = function(){
     this.mcQuestions = [];
     this.tieBreakerQuestion = [];
     this.winner;
@@ -15,23 +15,21 @@ const Cell = function(quizName){
     console.log('Cell created.');
 };
 
-const Grid = function(game){
-    this.game = game;
-    this.quizName = game['quizName'];
+const Grid = function(gameId){
+    //console.log(gameId);
+    this.gameId = gameId;
     this.cells = [];
-    this.initializeGrid();
-    console.log('Grid initialized');
 };
 
 // sets up grid will cells and cell info
-Grid.prototype.initializeGrid = function(){
+Grid.prototype.initializeGrid = function(questionBank){
     //create 9 cells for this grid
     for (var i = 0; i < 9; i ++) {
         this.cells.push(new Cell());
     }
 
-    var tfQuestions = this.game.questionBank['tfQuestions'];
-    var mcQuestions = this.game.questionBank['mcQuestions'];
+    var tfQuestions = questionBank['tfQuestions'];
+    var mcQuestions = questionBank['mcQuestions'];
 
     var tfQuestionsIndicesArray = this.makeArrayofIndices(tfQuestions.length);
     var mcQuestionsIndicesArray = this.makeArrayofIndices(mcQuestions.length);

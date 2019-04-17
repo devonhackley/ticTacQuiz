@@ -1,6 +1,14 @@
 /* eslint-disable no-undef */
 'use strict';
 // global variables
+var winConditions = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[2,5,8],[3,4,5],[6,7,8],[2,4,6]];
+// track the choices each player makes
+var playerOneChoices = [];
+var playerTwoChoices = [];
+// keep a point system to check if a player has won. 3 points = a win
+var playerOnePoints = 0;
+var playerTwoPoints = 0;
+
 var gridSquares = document.getElementsByClassName('gridSquare');
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
@@ -79,15 +87,14 @@ console.log('Test Question Bank Saved');
 document.addEventListener('DOMContentLoaded', () => {
     //get the games in localStorage
     var gamesInLocalStorage = JSON.parse(localStorage['games']);
-    
+
     if(gamesInLocalStorage.length && gridSquares.length) {
         // this game is always the last game that is saved in local storage
         var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
-        
+
         populateGridIconsOnDom(thisGame);
         //addBoxListeners(thisGame);
-    } 
-    
+    }
 
 });
 
@@ -102,7 +109,6 @@ var populateGridIconsOnDom = function(thisGame) {
             //add event lister for click
             gridSquares[i].addEventListener('click', (event) => clickHandler(event, thisGame));
             gridSquareEL.innerHTML = '<i class="fas fa-question-circle"' + 'id=' + i + '></i>';
- 
         } else {
             numWins++;
             if(cells[i]['winnerIcon'] === 'O') {
@@ -163,7 +169,7 @@ var clickHandler = (e, thisGame) => {
         // show mcQuestion in question area
         // get data from user input
         //if active player is correct, cell winner is active player
-            
+
     } else {
         //tie breaker
         question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].length - 1];
@@ -172,15 +178,59 @@ var clickHandler = (e, thisGame) => {
         // show TF Question in TF Question form in Question area
         // get data from user input
         //if active player is correct, cell winner is active player
-            //else cell winner is inactive player
-        
+        //else cell winner is inactive player
+
     }
-    
+
     //switch turns
 
     //replace game info in game local storage and save
 
     // LOOP UNTIL GAME ENDS
+};
+
+// function to populate a form for the question when a square is clicked.
+var showQuestion = () => {
+
+};
+
+var checkWinConditions = () => {
+    if (playerOnePoints === 3) {
+        console.log('Player 1 Wins!');
+        return true;
+        // stop game
+        // remove listeners
+    } else if(playerTwoPoints === 3) {
+        console.log('Player 2 Wins!');
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
+var keepScore = () => {
+    // loop through the win conditions
+    for(var i = 0; i < winConditions.length; i++) {
+        let innerArr = winConditions[i];
+        // loop through the players choices arrays and check against the win condition arrays[i]
+        for(var j = 0; j < innerArr.length; j++) {
+            if (playerOneChoices.includes(innerArr[j])) {
+                // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
+                playerOnePoints++;
+                // checkWin logic
+                checkWinConditions();
+            } else if (playerTwoChoices.includes(innerArr[j])) {
+                // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
+                playerTwoPoints++;
+                // checkWin logic
+                checkWinConditions();
+            }
+        }
+        // zero out the players points if neither player reached 3 points through the check.
+        playerOnePoints = 0;
+        playerTwoPoints = 0;
+    }
 };
 
 // adding boxlistners

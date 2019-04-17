@@ -41,12 +41,20 @@ main {
 #grid {
   width: 600px;
   margin: 0 auto;
+  position: absolute;
 }
 
 #grid div {
   width: 200px;
   height: 200px;
   float: left;
+}
+
+#questionBox {
+  border: 2px solid black;
+  height: 400px;
+  width: 500px;
+  float: right;
 }
 
 #grid div i {

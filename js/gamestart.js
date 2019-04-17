@@ -3,6 +3,7 @@
 const gameSelect = document.getElementById('questionsSelection');
 const gameStartForm = document.getElementById('gameStartForm');
 const playerOneIconSelector = document.getElementById('playerOneIcon');
+const playerTwoIconSelector = document.getElementById('playerTwoIcon');
 const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
 var newGame;
@@ -23,6 +24,10 @@ var handleGameStartForm = function(event){
     // game info
     const p1 = event.target.playerOne.value.toLowerCase();
     const p2 = event.target.playerTwo.value.toLowerCase();
+    const p1Icon = event.target.playerOneIconX.checked ? event.target.playerOneIconX.value :
+        event.target.playerOneIconO.value;
+    const p2Icon = event.target.playerTwoIconO.checked ? event.target.playerOneIconO.value :
+        event.target.playerOneIconX.value;
     const selectedQuiz = gameSelect.options[gameSelect.selectedIndex].text;
     let player1 = {};
     let player2 = {};
@@ -40,16 +45,16 @@ var handleGameStartForm = function(event){
         });
         if(!Object.keys(player1).length){ // create them if they arent in the playerBank
             //create players
-            player1 = new Player(p1); // eslint-disable-line
+            player1 = new Player(p1, p1Icon); // eslint-disable-line
         }
         if(!Object.keys(player2).length) {
-            player2 = new Player(p2); // eslint-disable-line
+            player2 = new Player(p2, p2Icon); // eslint-disable-line
         }
 
     } else { // no local storage
         //create players
-        player1 = new Player(p1); // eslint-disable-line
-        player2 = new Player(p2); // eslint-disable-line
+        player1 = new Player(p1, p1Icon); // eslint-disable-line
+        player2 = new Player(p2, p2Icon); // eslint-disable-line
     }
     // create new game from inputs
     createGame(selectedQuiz, player1, player2);

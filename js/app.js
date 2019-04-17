@@ -271,7 +271,7 @@ var showQuestionForm = function(question) {
         let radioLabel = document.createElement('label');
         let elRadio = document.createElement('input');
         radioLabel.setAttribute('for', 'qestionResponses');
-        radioLabel.innerHTML = questionResponse[i];
+        radioLabel.textContent = questionResponse[i];
         elRadio.setAttribute('type', 'radio');
         elRadio.setAttribute('name', 'questionResponses');
         elRadio.setAttribute('value', questionResponse[i]);

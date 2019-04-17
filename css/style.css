@@ -68,6 +68,10 @@ form {
   display: none;
 }
 
+/* #currentQuiz {
+  float: right;
+} */
+
 #leaderboard {
   width: 90%;
   margin: 90px auto;
@@ -92,4 +96,3 @@ th, td{
   border-color: #000;
   border-style: solid;
 }
-

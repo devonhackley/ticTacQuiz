@@ -23,6 +23,14 @@
       <form action="gamestart.html">
         <input type="submit" id="playButton" value="Let's Play">
       </form>
+
+
+      <section id="currentQuizSection">
+        <h2>Questions in Current Quiz:</h2>
+        <ol id="currentQuizList">
+        </ol>
+      </section>
+      <br/>
       <br/>
 
       <form id="newQuizForm">
@@ -40,6 +48,8 @@
       <select id="quizName">
       </select>
       <br/>
+
+
 
       <form id="newQuestionForm">
         <fieldset>
@@ -64,12 +74,7 @@
 
         </fieldset>
       </form>
-      <section id="currentQuizSection">
-        <h2>Questions in Current Quiz:</h2>
-        <ol id="currentQuizList">
-          
-        </ol>
-      </section>
+
     </main>
     <script src="./js/questions.js"></script>
     <script src="./js/player.js"></script>

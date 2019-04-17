@@ -6,7 +6,6 @@ if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
 }
 
-
 var saveQuestionsInBank = function() {
     new Quiz('TEST');
     new Question('TEST', 'TrueFalse', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
@@ -73,20 +72,47 @@ var saveQuestionsInBank = function() {
 };
 
 saveQuestionsInBank();
-console.log(JSON.parse(localStorage['quizBank']));
+console.log('Test Question Bank Saved');
 
 
 // adding event listeners for the boxes when the DOM content loads
 document.addEventListener('DOMContentLoaded', () => {
-
-    addBoxListeners();
+    //get the games in localStorage
+    var gamesInLocalStorage = JSON.parse(localStorage['games']);
+    
+    // this game is always the last game that is saved in local storage
+    var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
+    
+    populateGridIconsOnDom(thisGame.grid.cells);
+    addBoxListeners(thisGame);
 
 });
 
 ////////////////////// helper functions //////////////////////
 
+var populateGridIconsOnDom = function(cells) {
+
+    for(var i = 0; i < cells.length; i++) {
+        var gridSquareEL = gridSquares[i];
+        if (!cells[i]['winner']) {
+            gridSquareEL.innerHTML = '<i class="fas fa-question-circle"></i>';
+        } else {
+            gridSquareEL.innerHTML = cells[i]['winnerIcon'];
+        }
+    }
+};
+
 var clickHandler = (e) => {
+    var cellIndex = e.target.id;
     console.log(`The cell with ID ${e.target.id} has been clicked!`);
+    
+    
+    
+    // get the cell data for the grid cell index of index of cell clicked on front end
+    //var cellData = thisGame.grid.cells[cellIndex];
+    //console.log(cellData);
+
+    //replace game info in game local storage and save
 };
 
 // adding boxlistners

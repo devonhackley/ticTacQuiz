@@ -1,13 +1,14 @@
 'use strict';
 // Constructior for Game instances
 const Game = function(quizName, playerOne, playerTwo) {
+    this.gameId = this.calcGameId();
     this.quizName = quizName;
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
     this.questionBank = this.getQuestionBank();
     // Setup grid
     this.isPlayerOneTurn = true;
-    this.grid = new Grid(this);
+    this.grid = new Grid(this.gameId);
     console.log('New game created.');
 };
 
@@ -51,3 +52,10 @@ Game.prototype.switchTurns = function(){
 Game.prototype.handleUserSelection = function(){
 
 };
+
+Game.prototype.calcGameId = function() {
+    var numGamesInLocStorage = JSON.parse(localStorage['games']).length;
+    var newGameId = numGamesInLocStorage;
+    return newGameId;
+};
+

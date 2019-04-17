@@ -7,6 +7,7 @@ const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
 var newGame;
 
+
 var populateQuizzes = function(){
     if(localStorage['quizBank']) {
         let quizzes = JSON.parse(localStorage['quizBank']);
@@ -51,13 +52,41 @@ var handleGameStartForm = function(event){
         player2 = new Player(p2); // eslint-disable-line
     }
     // create new game from inputs
-    newGame = new Game(selectedQuiz, player1, player2); // eslint-disable-line
-    //reset form
-    gameStartForm.reset();
+    createGame(selectedQuiz, player1, player2);
     // start game
-    newGame.playGame();
+    // newGame.playGame();
 
 };
+
+/** Retrieved from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#Examples
+ * Used because the game object was a circular structure
+ */
+const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+        if (typeof value === 'object' && value !== null) {
+            if (seen.has(value)) {
+                return;
+            }
+            seen.add(value);
+        }
+        return value;
+    };
+};
+
+function createGame(quiz, play1, play2){
+    event.preventDefault();
+    // create new game from inputs
+    newGame = new Game(quiz, play1, play2); // eslint-disable-line
+    var games = JSON.parse(localStorage['games']);
+    games.push(newGame);
+    var gamesToBeSaved = JSON.stringify(games, getCircularReplacer());
+    localStorage['games'] = gamesToBeSaved;
+    // start game
+    newGame.playGame();
+    var origin = window.location.origin;
+    window.location.assign(`${origin}/play.html?`);
+}
 
 var handleIconSelection = function(event){ // controls icon selection, so users cannot be the same icon
     const icon = event.target.value;
@@ -70,14 +99,15 @@ var handleIconSelection = function(event){ // controls icon selection, so users 
         playerTwoIconO.checked = true;
         playerTwoIconX.disabled = true;
     }
-}
+};
 
 if(gameSelect){
     populateQuizzes();
     // event listener for game start form
-    gameStartForm.addEventListener('submit', handleGameStartForm);
     playerOneIconSelector.addEventListener('click', handleIconSelection);
+    gameStartForm.addEventListener('submit', handleGameStartForm);
 }
+
 
 
 

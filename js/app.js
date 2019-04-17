@@ -83,53 +83,111 @@ document.addEventListener('DOMContentLoaded', () => {
     // this game is always the last game that is saved in local storage
     var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
     
-    populateGridIconsOnDom(thisGame.grid.cells);
-    addBoxListeners(thisGame);
+    populateGridIconsOnDom(thisGame);
+    //addBoxListeners(thisGame);
 
 });
 
 ////////////////////// helper functions //////////////////////
 
-var populateGridIconsOnDom = function(cells) {
-
+var populateGridIconsOnDom = function(thisGame) {
+    var numWins = 0;
+    var cells = thisGame.grid.cells;
     for(var i = 0; i < cells.length; i++) {
         var gridSquareEL = gridSquares[i];
         if (!cells[i]['winner']) {
+            //add event lister for click
+            gridSquares[i].addEventListener('click', (event) => clickHandler(event, thisGame));
             gridSquareEL.innerHTML = '<i class="fas fa-question-circle"' + 'id=' + i + '></i>';
+
+          
         } else {
+            numWins++;
             gridSquareEL.innerHTML = cells[i]['winnerIcon'];
 
-            //TODO check to see if this is correct
+            //TODO check to see if logic below this is correct
             gridSquareEL.innerHTML.addAttribute('id', i);
+
+            //remove event Listener
+            gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
+
+            if(numWins === 9){
+                //end Game
+                //update player stats
+            }
         }
     }
 };
 
-var clickHandler = (e) => {
+var clickHandler = (e, thisGame) => {
+    //get index of grid cell clicked
     var cellIndex = e.target.id;
     console.log(`The cell with ID ${e.target.id} has been clicked!`);
+
+    //TODO
+    // remove box listeners from all other boxes except cellIndex
+
+    //determine active player
+    let activePlayer;
+    let inactivePlayer;
+    if(thisGame.isPlayerOneTurn) {
+        activePlayer = thisGame.playerOne;
+        inactivePlayer = thisGame.playerTwo;
+    } else {
+        activePlayer = thisGame.playerTwo;
+        inactivePlayer = thisGame.playerOne;
+    }
+    console.log(`activePlayer is ${activePlayer.userName}`);
+    //TODO
+    // write active Player to Dom
+
+
+    //get the cell data for the grid cell index of index of cell clicked on front end
+    var cellData = thisGame.grid.cells[cellIndex];
+    console.log(cellData);
+
+    //check for question
+    var question;
+
+    if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
+        question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
+        // get MC Form
+        // show mcQuestion in question area
+        // get data from user input
+        //if active player is correct, cell winner is active player
+            
+    } else {
+        //tie breaker
+        question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
+        // get TF Question Form
+        // show TF Question in TF Question form in Question area
+        // get data from user input
+        //if active player is correct, cell winner is active player
+            //else cell winner is inactive player
+        
+    }
     
-    
-    
-    // get the cell data for the grid cell index of index of cell clicked on front end
-    //var cellData = thisGame.grid.cells[cellIndex];
-    //console.log(cellData);
+    //switch turns
 
     //replace game info in game local storage and save
+
+    // LOOP UNTIL GAME ENDS
 };
 
 // adding boxlistners
-var addBoxListeners = () => {
+var addBoxListeners = (thisGame) => {
+    console.log(thisGame);
     for(let i = 0; i < gridSquares.length; i++){
-        gridSquares[i].addEventListener('click', clickHandler);
+        gridSquares[i].addEventListener('click', (event) => clickHandler(event, thisGame));
     }
 };
 
 // removing box listeners
 var removeBoxListeners = () => {
     for(let i = 0; i < gridSquares.length; i++) {
-        gridSquares[i].removeEventListener();
+        gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
     }
 };
+
 
 

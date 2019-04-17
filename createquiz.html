@@ -12,7 +12,10 @@
       <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
-        <a href="#">Leaderboard</a>
+        <a href="rules.html">How To Play</a>
+        <a href="gamestart.html">Play Game</a>
+        <a href="createquiz.html">Create Game</a>
+        <a href="leaderboard.html">Leaderboard</a>
       </nav>
     </header>
     <main>
@@ -23,6 +26,14 @@
       <form action="gamestart.html">
         <input type="submit" id="playButton" value="Let's Play">
       </form>
+
+
+      <section id="currentQuizSection">
+        <h2>Questions in Current Quiz:</h2>
+        <ol id="currentQuizList">
+        </ol>
+      </section>
+      <br/>
       <br/>
 
       <form id="newQuizForm">
@@ -40,6 +51,8 @@
       <select id="quizName">
       </select>
       <br/>
+
+
 
       <form id="newQuestionForm">
         <fieldset>
@@ -64,13 +77,10 @@
 
         </fieldset>
       </form>
-      <section id="currentQuizSection">
-        <h2>Questions in Current Quiz:</h2>
-        <ol id="currentQuizList">
-          
-        </ol>
-      </section>
+
     </main>
+    <footer>&copy; 2019</footer>
+
     <script src="./js/questions.js"></script>
     <script src="./js/player.js"></script>
     <script src="./js/grid.js"></script>

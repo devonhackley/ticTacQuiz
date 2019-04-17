@@ -111,7 +111,11 @@ var populateGridIconsOnDom = function(thisGame) {
             gridSquareEL.innerHTML = '<i class="fas fa-question-circle"' + 'id=' + i + '></i>';
         } else {
             numWins++;
-            gridSquareEL.innerHTML = cells[i]['winnerIcon'];
+            if(cells[i]['winnerIcon'] === 'O') {
+                gridSquareEL.innerHTML = '<i class="far fa-circle"' + 'id=' + i + '></i>';
+            } else {
+                gridSquareEL.innerHTML = '<i class="far fa-times"' + 'id=' + i + '></i>';
+            }
 
             //TODO check to see if logic below this is correct
             gridSquareEL.innerHTML.addAttribute('id', i);
@@ -120,6 +124,7 @@ var populateGridIconsOnDom = function(thisGame) {
             gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
 
             if(numWins === 9){
+                //TODO
                 //end Game
                 //update player stats
             }
@@ -158,7 +163,8 @@ var clickHandler = (e, thisGame) => {
     var question;
 
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
-        question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
+        question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
         // get MC Form
         // show mcQuestion in question area
         // get data from user input
@@ -166,7 +172,8 @@ var clickHandler = (e, thisGame) => {
 
     } else {
         //tie breaker
-        question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
+        question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].length - 1];
+        //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
         // get TF Question Form
         // show TF Question in TF Question form in Question area
         // get data from user input
@@ -241,5 +248,8 @@ var removeBoxListeners = () => {
     }
 };
 
+var showQuestionForm = function() {
+    console.log('question form is is displayed');
+};
 
 

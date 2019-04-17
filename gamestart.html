@@ -18,7 +18,7 @@
     </header>
     <div id="game-start">
         <h2>Game Info</h2>
-        <form id="gameStartForm">
+        <form id="gameStartForm" action="play.html">
             <label for="playerOneName">Player 1 Name:</label>
             <input type="text" name="playerOne" required>
             <div id="playerOneIcon">
@@ -42,7 +42,7 @@
             </select>
             <button onclick="location.href='./createquiz.html'" id="quizCreateBtn">Create Your Own Quiz</button>
     
-            <button type="submit" id="gameStartFormButton" value="Start Game"> Start Game</button>
+            <button id="gameStartFormButton" value="Start Game"> Start Game</button>
         </form>
     </div>
     <script src="./js/questions.js"></script>

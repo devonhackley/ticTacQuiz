@@ -71,21 +71,22 @@ form {
 #leaderboard {
   width: 90%;
   margin: 90px auto;
+}
 
+table{
+  border-spacing: 0;
+}
 
+tr:first-child{
+  background-color: #ccc;
 }
-#leaderboard-container li{
-  width: 100%;
+
+th, td{
+  margin: 0;
+  padding: .5em 1.5em;
+  text-align: center;
+  border-width: 1px 0;
+  border-color: #000;
+  border-style: solid;
 }
-#leaderboard-container li span {
-  float: left;
-  width: 30%;
-}
-#leaderboard-container li span:first-child{
-  margin-left: 10px;
-}
-#leaderboard-container span span:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+

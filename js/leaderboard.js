@@ -5,26 +5,37 @@ if(localStorage['playerBank']){
 }
 
 
-function sortRankPlayers(){
-    var leaderBoard = document.getElementById('leaderboard-container');
-    var ol = document.createElement('ol');
-    leaderBoard.appendChild(ol);
+function rankPlayers(){
+    var leaderBoardTable = document.getElementById('table-area');
+    var tBody = document.createElement('tbody');
+    leaderBoardTable.appendChild(tBody);
+    let headerRow = document.createElement('tr');
+    let rank = document.createElement('th');
+    let player = document.createElement('th');
+    let wins = document.createElement('th');
+    rank.textContent = 'Rank';
+    player.textContent = 'Username';
+    wins.textContent = '# of Wins';
+    headerRow.appendChild(rank);
+    headerRow.appendChild(player);
+    headerRow.appendChild(wins);
+    tBody.appendChild(headerRow);
     rankedPlayers.sort((a,b) => {
         return b.numWins - a.numWins;
     });
-    rankedPlayers.forEach((player)=> {
-        let name = document.createElement('span');
-        let wins = document.createElement('span');
-        let losses = document.createElement('span');
+    rankedPlayers.forEach((player, index)=> {
+        let ranking = document.createElement('td');
+        let name = document.createElement('td');
+        let wins = document.createElement('td');
+        ranking.textContent = index + 1;
         name.textContent = player.userName;
         wins.textContent = player.numWins;
-        losses.textContent = player.numLosses;
 
-        let winsRow = document.createElement('li');
-        winsRow.appendChild(name);
-        winsRow.appendChild(wins);
-        winsRow.appendChild(losses);
-        ol.appendChild(winsRow);
+        let row = document.createElement('tr');
+        row.appendChild(ranking);
+        row.appendChild(name);
+        row.appendChild(wins);
+        tBody.appendChild(row);
     });
 }
-sortRankPlayers();
+rankPlayers();

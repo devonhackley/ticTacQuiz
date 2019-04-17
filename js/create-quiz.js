@@ -4,6 +4,7 @@ var newQuizForm = document.getElementById('newQuizForm');
 var responseSection = document.getElementById('responseSection');
 var questionTypeSection = document.getElementById('questionTypeSection');
 var quizNameSelector = document.getElementById('quizName');
+var currentQuizList = document.getElementById('currentQuizList');
 
 // This variable pulls all currently existing quizzes from local storage.
 var quizBank = JSON.parse(localStorage['quizBank']);
@@ -32,6 +33,10 @@ function handleNewQuestionSubmit(event) {
     console.log(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
     // eslint-disable-next-line no-undef
     new Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
+
+    quizBank = JSON.parse(localStorage['quizBank']);
+    displayCurrentQuiz();
+
 }
 
 // This function is an event handler for the + New Quiz form.
@@ -55,8 +60,16 @@ function handleNewQuizSubmit(event) {
 }
 
 // This function is an event handler to make the '+ New Question' form appear when a quiz name is selected.
+
+var currentQuiz = '';
+var currentQuizQuestions = '';
 function handleQuizSelected() {
     document.getElementById('newQuestionForm').style.display = 'unset';
+    document.getElementById('currentQuizSection').style.display = 'unset';
+    document.getElementById('currentQuizSection').style.float = 'right';
+
+    currentQuiz = quizNameSelector.value;
+    displayCurrentQuiz();
 }
 
 // This function is an event handler for selecting question type.
@@ -104,19 +117,33 @@ function questionTypeHandler(event) {
     }
 }
 
-// // This is code in progress to display all questions of the currently selected quiz.
-// function displayCurrentQuiz(event) {
+// This is code in progress to display all questions of the currently selected quiz.
+function displayCurrentQuiz() {
+    currentQuizList.innerHTML = '';
 
-//     var liEl = document.createElement('li');
-//     var currentQuiz = quizNameSelector.value;
+    var liEl;
+    var ulEl;
+    var subliEl;
+    console.log(currentQuiz);
 
-//     for (var i = 0 ; i < Object.keys(quizBank[currentQuiz]).length ; i++) {
+    currentQuizQuestions = quizBank[currentQuiz].mcQuestions.concat(quizBank[currentQuiz].tfQuestions);
+    console.log(currentQuizQuestions.length);
 
-//     }
+    for (var i = 0 ; i < currentQuizQuestions.length ; i++) {
+        liEl = document.createElement('li');
+        ulEl = document.createElement('ul');
+        subliEl = document.createElement('li');
+
+        liEl.textContent = currentQuizQuestions[i].questionQuestion;
+        subliEl.textContent = 'Answer: ' + currentQuizQuestions[i].questionResponses[currentQuizQuestions[i].correctAnswer];
+        ulEl.appendChild(subliEl);
+        liEl.appendChild(ulEl);
+
+        currentQuizList.append(liEl);
+    }
 
 
-// var currentQuestions = quizBank.
-// }
+}
 
 // This function adds all existing quizzes to the Quiz Selector dropdown menu.
 function fillQuizSelector() {

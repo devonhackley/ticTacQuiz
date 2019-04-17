@@ -95,9 +95,12 @@ var populateGridIconsOnDom = function(cells) {
     for(var i = 0; i < cells.length; i++) {
         var gridSquareEL = gridSquares[i];
         if (!cells[i]['winner']) {
-            gridSquareEL.innerHTML = '<i class="fas fa-question-circle"></i>';
+            gridSquareEL.innerHTML = '<i class="fas fa-question-circle"' + 'id=' + i + '></i>';
         } else {
             gridSquareEL.innerHTML = cells[i]['winnerIcon'];
+
+            //TODO check to see if this is correct
+            gridSquareEL.innerHTML.addAttribute('id', i);
         }
     }
 };

@@ -87,7 +87,7 @@ console.log('Test Question Bank Saved');
 var saveDefaultQuestionsInBank = function() {
     new Quiz('DEFAULT');
 
-    new Question('DEFAULT', 'MultipleChoice', 'In HTML, what tag is used for indicating superscript?', ['<superscript>', '<super>', '<sup>', '<script^>'], 2);
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, what tag is used for indicating superscript?', ['<superscript>', '<super>', '<sup>', '<script>'], 2);
     new Question('DEFAULT', 'MultipleChoice', 'What should be in the first line of every HTML file?', ['<!DOCTYPE html>', '<html>', '<head>', '<body>'], 0);
     new Question('DEFAULT', 'MultipleChoice', 'What symbol would you use in front of a CSS selector to target a class attribute?', ['#', '.', '>', '[class]'], 1);
     new Question('DEFAULT', 'MultipleChoice', 'Which of the following is NOT a data type in JavaScript?', ['number', 'string', 'variable', 'boolean'], 2);

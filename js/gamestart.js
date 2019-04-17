@@ -5,8 +5,10 @@ const gameStartForm = document.getElementById('gameStartForm');
 const playerOneIconSelector = document.getElementById('playerOneIcon');
 const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
+var newGame;
 
-function populateQuizzes(){
+
+var populateQuizzes = function(){
     if(localStorage['quizBank']) {
         let quizzes = JSON.parse(localStorage['quizBank']);
         for(var key in quizzes) {
@@ -15,9 +17,9 @@ function populateQuizzes(){
             gameSelect.appendChild(newEle);
         }
     }
-}
+};
 
-function handleGameStartForm(event){
+var handleGameStartForm = function(event){
     // game info
     const p1 = event.target.playerOne.value.toLowerCase();
     const p2 = event.target.playerTwo.value.toLowerCase();
@@ -50,15 +52,27 @@ function handleGameStartForm(event){
         player2 = new Player(p2); // eslint-disable-line
     }
     // create new game from inputs
-    const newGame = new Game(selectedQuiz, player1.userName, player2.userName); // eslint-disable-line
-    //reset form
-    gameStartForm.reset();
+    createGame(selectedQuiz, player1, player2);
     // start game
-    newGame.playGame();
+    // newGame.playGame();
 
+};
+
+function createGame(quiz, play1, play2){
+    // create new game from inputs
+    newGame = new Game(quiz, play1, play2); // eslint-disable-line
+
+    //initialize grid for the new game
+    newGame.grid.initializeGrid(newGame.questionBank);
+
+    //add game to local storage
+    var games = JSON.parse(localStorage['games']);
+    games.push(newGame);
+    var gamesToBeSaved = JSON.stringify(games);
+    localStorage['games'] = gamesToBeSaved;
 }
 
-function handleIconSelection(event){ // controls icon selection, so users cannot be the same icon
+var handleIconSelection = function(event){ // controls icon selection, so users cannot be the same icon
     const icon = event.target.value;
     if(icon === 'O'){
         playerTwoIconX.disabled = false;
@@ -69,12 +83,17 @@ function handleIconSelection(event){ // controls icon selection, so users cannot
         playerTwoIconO.checked = true;
         playerTwoIconX.disabled = true;
     }
+};
+
+if(gameSelect){
+    populateQuizzes();
+    // event listener for game start form
+    playerOneIconSelector.addEventListener('click', handleIconSelection);
+    gameStartForm.addEventListener('submit', handleGameStartForm);
 }
 
-populateQuizzes();
 
-// event listener for game start form
-gameStartForm.addEventListener('submit', handleGameStartForm);
-playerOneIconSelector.addEventListener('click', handleIconSelection);
+
+
 
 

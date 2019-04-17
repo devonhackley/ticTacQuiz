@@ -75,6 +75,9 @@ form {
 
 table{
   border-spacing: 0;
+  width: 80%;
+  height: 500px;
+  margin: 0px auto;
 }
 
 tr:first-child{

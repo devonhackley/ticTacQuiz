@@ -389,6 +389,20 @@ th, td{
 
 /******************* play.html question form css *****************/
 
+
+@keyframes gridSquare {
+  to {
+    transform: scale(1.1);
+  }
+}
+.gridSquare:hover {
+  animation-name: gridSquare;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 .showQuestionBox {
   border: 2px solid black;
   position: absolute;
@@ -404,17 +418,17 @@ th, td{
 #resultsBox {
   border: 2px solid black;
   color: green;
-  /* position: absolute; */
-  /* top: 50%;
-  left: 50%; */
-  /* margin-top: -200px; */
-  margin-left: 50px;
-  width: 300px;
-  height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -350px;
+  width: 700px;
+  height: 400px;
   background-color: white;
 }
 
-/* .showResultBox {
+.showResultBox {
   border: 2px solid black;
   position: absolute;
   top: 50%;
@@ -424,13 +438,21 @@ th, td{
   width: 700px;
   height: 400px;
   background-color: white;
-} */
+}
 
-.hideQuestionBox, .hideResultBox {
+.hideQuestionBox, .hideResultsBox {
   display: none;
 }
 
 #error-box {
   display: none;
   background: #fff;
+}
+.error {
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+  padding-top: 10px;
+  margin: 0 auto;
+  border-radius: 10px;
 }

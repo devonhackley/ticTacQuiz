@@ -146,6 +146,9 @@ var populateGridIconsOnDom = function(thisGame) {
     for(var i = 0; i < cells.length; i++) {
         var gridSquareEL = gridSquares[i];
         if (!cells[i]['winner']) {
+            if (!cells[i].mcQuestions.length) {
+                gridSquares[i].classList.add('tie-breaker-square');
+            }
             //add event lister for click
             gridSquares[i].addEventListener('click', (event) => clickHandler(event, thisGame));
             gridSquareEL.innerHTML = '<i class="fas fa-question-circle"' + 'id=' + i + '></i>';
@@ -309,6 +312,9 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
     var winner;
 
     if(question.correctAnswer === userResponse) {
+        if(question.questionType === 'TrueFalse') { 
+            gridSquares[cellData.id].classList.remove('tie-breaker-square');
+        }
         console.log('question was answered correctly');
 
         message = `Way to go, ${activePlayer.userName.toUpperCase()}, you earned that square`;
@@ -328,12 +334,13 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
 
         //display message on DOM
         message = `Hard Luck ${activePlayer.userName.toUpperCase()}, that was not correct.`;
+        gridSquares[cellData.id].classList.remove('tie-breaker-square');
         showLastPlayInfoOnDom(message);
 
         if(question.questionType === 'TrueFalse') {
             cellData.winner = inactivePlayer;
             cellData.winnerIcon = inactivePlayer.icon;
-
+            
             //display message on DOM
             message = `You stole that square, ${inactivePlayer.userName.toUpperCase()}`;
             showLastPlayInfoOnDom(message);
@@ -430,10 +437,10 @@ var updatePlayerInfoInLocalStorage = function(thisGame) {
     //add player back to local storage
     var playerBank = JSON.parse(localStorage['playerBank']);
     for (var i = 0; i < playerBank.length; i++) {
-        if(playerBank[i] === thisGame.playerOne.userName) {
-            playerBank[i].userName = thisGame.playerOne;
-        } else if (playerBank[i] === thisGame.playerOne.userName) {
-            playerBank[i].userName = thisGame.playerTwo;
+        if(playerBank[i].userName === thisGame.playerOne.userName) {
+            playerBank[i] = thisGame.playerOne;
+        } else if (playerBank[i].userName === thisGame.playerOne.userName) {
+            playerBank[i] = thisGame.playerTwo;
         }
     }
 

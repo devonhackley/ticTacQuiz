@@ -319,4 +319,5 @@ th, td{
 
 #error-box {
   display: none;
+  background: #fff;
 }

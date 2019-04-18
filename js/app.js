@@ -219,6 +219,11 @@ var clickHandler = (e, thisGame) => {
 
     }
 
+    //hide grid remove event listener from grid
+    var gridDiv = document.getElementById('grid');
+    gridDiv.style.display = 'none';
+
+    //display question to user
     showQuestionForm(question);
     var userResponseButton = document.getElementById('user-response-button');
     //add event listener to form submit button
@@ -319,8 +324,8 @@ var addBoxListeners = (thisGame) => {
 };
 
 // removing box listeners
-var removeBoxListeners = () => {
-    for(let i = 0; i < cells.length; i++) {
+var removeBoxListeners = (thisGame) => {
+    for(let i = 0; i < gridSquares.length; i++) {
         gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
     }
 };

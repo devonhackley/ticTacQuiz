@@ -3,7 +3,6 @@
 const gameSelect = document.getElementById('questionsSelection');
 const gameStartForm = document.getElementById('gameStartForm');
 const playerOneIconSelector = document.getElementById('playerOneIcon');
-const playerTwoIconSelector = document.getElementById('playerTwoIcon');
 const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
 var newGame;
@@ -38,11 +37,15 @@ var handleGameStartForm = function(event){
         players.forEach((play) => {
             const name = play.userName.toLowerCase();
             if(name === p1){
-                player1 = new Player(name, p1Icon);
+                player1 = play;
+                player1.icon = p1Icon;
             } else if (name === p2){
-                player2 = new Player(name, p2Icon);
+                player2 = play;
+                player2.icon = p2Icon;
             }
         });
+        updateLocalStorage('playerBank', players);
+        console.log('players', players);
         if(!Object.keys(player1).length){ // create them if they arent in the playerBank
             //create players
             player1 = new Player(p1, p1Icon); // eslint-disable-line

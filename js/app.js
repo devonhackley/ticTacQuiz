@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ////////////////////// helper functions //////////////////////
 
 var populateGridIconsOnDom = function(thisGame) {
-    var numWins = 9;
+    var numWins = 0;
     var cells = thisGame.grid.cells;
     for(var i = 0; i < cells.length; i++) {
         var gridSquareEL = gridSquares[i];
@@ -360,7 +360,7 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
             }
         }
     }
-    var gameOver = true;//hasWinConditions();
+    var gameOver = hasWinConditions();
 
     if(gameOver) {
         stopGame(activePlayer, inactivePlayer, thisGame);

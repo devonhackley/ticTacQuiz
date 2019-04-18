@@ -240,6 +240,19 @@ form {
 }
 #newQuestionForm , #currentQuizSection {
   display: none;
+  width: 40%;
+  margin: 10px;
+  height: fit-content;
+  padding-bottom: 10px;
+}
+#newQuizForm {
+  width: 30%;
+  height: 100px;
+  margin: 10px;
+}
+#newQuizForm [for="quizName"] {
+  margin-left: 10%;
+  margin-top: 50%;
 }
 
 #currentQuiz {

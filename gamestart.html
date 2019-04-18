@@ -18,14 +18,20 @@
             <a href="leaderboard.html">Leaderboard</a>
         </nav>
     </header>
+
     <main>
 
-        <h1 class="subPageTitle">Game Start</h1>
+    <h1 class="subPageTitle">Game Start</h1>
 
-        <div id="game-start" class="form-container">
-            <h2>Game Info</h2>
-            <form id="gameStartForm" class="gameForm" action="play.html">
-                <label for="playerOneName">Player 1 Name:</label>
+    <div id="error-box"></div>
+    <div id="game-start" class="form-container">
+        <h2>Game Info</h2>
+        <form id="gameStartForm" class="gameForm">
+            <label for="playerOneName">Player 1 Name:</label>
+            <br>
+            <input type="text" name="playerOne" required>
+            <div id="playerOneIcon">
+                <label for="playerOneName">Player 1 Icon:</label>
                 <br>
                 <input type="text" name="playerOne" required>
                 <div id="playerOneIcon">

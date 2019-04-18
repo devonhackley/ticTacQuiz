@@ -22,11 +22,15 @@ if(localStorage['playerBank']){
 } else {
     var peter = new Player('Peter');
     peter.numWins = 5; // for leaderboard
+    peter.icon = '';
     var paolo = new Player('Paolo');
     paolo.numWins = 3; // for leaderboard
+    paolo.icon = '';
     var tisha = new Player('Tisha');
     tisha.numWins = 10; // for leaderboard
+    tisha.icon = '';
     var devon = new Player('Devon');
     devon.numWins = 2; // for leaderboard
+    devon.icon = '';
     updateLocalStorage('playerBank', playerBank);
 }

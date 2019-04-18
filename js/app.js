@@ -465,3 +465,8 @@ var showLastPlayInfoOnDom = function(message){
     var lastPlayInfo = document.getElementById('last-play-info');
     lastPlayInfo.textContent = message;
 };
+
+var updateLocalStorage = function(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+};
+

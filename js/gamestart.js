@@ -76,7 +76,7 @@ var handleGameStartForm = function(event){
         window.location.assign(`${origin}/play.html`);
         createGame(selectedQuiz, player1, player2);
     } else {
-        errorBox.textContent = 'Players must have unique names';
+        errorBox.textContent = 'Players must have unique names!';
         errorBox.classList.add('error');
         errorBox.style.display = 'block';
     }

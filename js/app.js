@@ -345,12 +345,12 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
         if(question.questionType === 'TrueFalse') {
             cellData.winner = inactivePlayer;
             cellData.winnerIcon = inactivePlayer.icon;
-            
+
             //display message on DOM
             message = `You stole that square, ${inactivePlayer.userName.toUpperCase()}`;
             showLastPlayInfoOnDom(message);
 
-            if (thisGame.isPlayerOneTurn) {
+            if (!thisGame.isPlayerOneTurn) {
                 playerOneChoices.push(cellData.id);
                 winner = 'PlayerOne';
             } else {

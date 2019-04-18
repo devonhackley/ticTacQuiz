@@ -170,7 +170,7 @@ var populateGridIconsOnDom = function(thisGame) {
             if(numWins === 9){
                 //TODO
                 //end Game
-                stopGame(); // stop game will have the populate results
+                stopGame('', '', thisGame, numWins); // stop game will have the populate results
             }
         }
     }
@@ -179,12 +179,12 @@ var populateGridIconsOnDom = function(thisGame) {
 var clickHandler = (e, thisGame) => {
     //get index of grid cell clicked
     var cellIndex = e.target.id;
-    console.log(`The cell with ID ${e.target.id} has been clicked!`);
 
 
     //determine active player
     let activePlayer;
     let inactivePlayer;
+
     if(thisGame.isPlayerOneTurn) {
         activePlayer = thisGame.playerOne;
         inactivePlayer = thisGame.playerTwo;
@@ -221,7 +221,6 @@ var clickHandler = (e, thisGame) => {
 
     showQuestionForm(question);
     var userResponseButton = document.getElementById('user-response-button');
-    console.log(userResponseButton);
     //add event listener to form submit button
     if(userResponseButton){
         userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData, question, activePlayer, inactivePlayer, thisGame));
@@ -264,7 +263,6 @@ var showQuestionForm = function(question) {
     elSubmit.setAttribute('id', 'user-response-button');
     elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
-    console.log(question.correctAnswer);
 
 };
 
@@ -322,7 +320,7 @@ var addBoxListeners = (thisGame) => {
 
 // removing box listeners
 var removeBoxListeners = () => {
-    for(let i = 0; i < gridSquares.length; i++) {
+    for(let i = 0; i < cells.length; i++) {
         gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
     }
 };
@@ -330,12 +328,11 @@ var removeBoxListeners = () => {
 var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlayer, thisGame) => {
     e.preventDefault();
     // handle what to do with the response
-    console.log('Handling question response');
-    
+
     let questionShowForm = document.getElementById('questionShowForm');
-   
+
     var userResponse;
-    
+
     for (var i = 0;  i < question.questionResponses.length; i++) {
         if(e.target.form[i].checked){
             userResponse = i;
@@ -352,7 +349,7 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
         }
         console.log('there');
     } else {
-        
+
         if(question.questionType === 'TrueFalse') {
             cellData.winner = inactivePlayer;
             cellData.winnerIcon = inactivePlayer.icon;
@@ -361,12 +358,12 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
             } else {
                 playerTwoChoices.push(cellData.id); 
             }
-        } 
+        }
     }
     var gameOver = hasWinConditions();
 
     if(gameOver) {
-        stopGame();
+        stopGame(activePlayer, inactivePlayer, thisGame);
     } else {
         console.log(thisGame.switchTurns);
         thisGame.switchTurns();
@@ -376,16 +373,32 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
 };
 
 // end the game
-var stopGame = (winner) => {
-    // save game information in local storage
+var stopGame = (winner, otherPlayer, thisGame, tie) => {
+
+    var winnerText = document.getElementById('winnerTitle');
+    var drawText = document.getElementById('drawTitle');
+    var resultsBox = document.getElementById('resultsBox');
 
     // updated player object with a win
-    if(winner){ 
-        playerObject.win++; // placeholder
-    } else if(!winner) {
-        playerObject.tie++; // placeholder
+    if(winner){
+        thisGame.isOver = true;
+        winner.numWins++;
+        otherPlayer.numLosses++;
+        winnerText.textContent = `${winner} has won this match!`;
+    } else if(tie === 9) {
+        thisGame.isOver = true;
+        winner.numDraws++;
+        otherPlayer.numDraws++;
+        drawText.textContent = `It's a draw between ${winner} and ${otherPlayer}.`;
         console.log('It\'s a tie');
     }
 
-    // popup for the results message with options that can either take you to a new game or view leaderboards
+    resultsBox.classList.add('showResultsBox');
+
+
+    // save game information in local storage
+    var games = JSON.parse(localStorage['games']);
+    games.push(thisGame);
+    var gamesToBeSaved = JSON.stringify(games);
+    localStorage['games'] = gamesToBeSaved;
 };

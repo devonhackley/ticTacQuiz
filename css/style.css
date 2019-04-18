@@ -316,3 +316,7 @@ th, td{
 .hideQuestionBox, .hideResultBox {
   display: none;
 }
+
+#error-box {
+  display: none;
+}

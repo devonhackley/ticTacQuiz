@@ -170,7 +170,7 @@ var populateGridIconsOnDom = function(thisGame) {
             if(numWins === 9){
                 //TODO
                 //end Game
-                //update player stats
+                stopGame(); // stop game will have the populate results
             }
         }
     }
@@ -181,8 +181,6 @@ var clickHandler = (e, thisGame) => {
     var cellIndex = e.target.id;
     console.log(`The cell with ID ${e.target.id} has been clicked!`);
 
-    //TODO
-    // remove box listeners from all other boxes except cellIndex
 
     //determine active player
     let activePlayer;
@@ -215,7 +213,6 @@ var clickHandler = (e, thisGame) => {
         //tie breaker
         question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
-
         // get data from user input
         //if active player is correct, cell winner is active player
         //else cell winner is inactive player
@@ -238,6 +235,8 @@ var clickHandler = (e, thisGame) => {
 
 // function to populate a form for the question when a square is clicked.
 var showQuestionForm = function(question) {
+    let questionDiv = document.getElementById('questionBox');
+    questionDiv.classList.add('showQuestionBox');
     let questionToAsk = question.questionQuestion;
     let questionResponse = question.questionResponses;
     let questionShowForm = document.getElementById('questionShowForm');
@@ -265,6 +264,8 @@ var showQuestionForm = function(question) {
     elSubmit.setAttribute('id', 'user-response-button');
     elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
+    userResponseButton = document.getElementById('user-response-button');
+    console.log(userResponseButton);
 
     console.log(question.correctAnswer);
 
@@ -331,6 +332,7 @@ var removeBoxListeners = () => {
 
 var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlayer, thisGame) => {
     e.preventDefault();
+    // handle what to do with the response
     console.log('Handling question response');
     
     let questionShowForm = document.getElementById('questionShowForm');
@@ -376,7 +378,17 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
     }
 };
 
-var stopGame = function() {
-    console.log('stopping game');
-};
+// end the game
+var stopGame = (winner) => {
+    // save game information in local storage
 
+    // updated player object with a win
+    if(winner){ 
+        playerObject.win++; // placeholder
+    } else if(!winner) {
+        playerObject.tie++; // placeholder
+        console.log('It\'s a tie');
+    }
+
+    // popup for the results message with options that can either take you to a new game or view leaderboards
+};

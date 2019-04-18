@@ -460,3 +460,6 @@ th, td{
   margin: 0 auto;
   border-radius: 10px;
 }
+nav * {
+  margin-left: 5%;
+}

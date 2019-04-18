@@ -18,9 +18,9 @@
             <a href="leaderboard.html">Leaderboard</a>
         </nav>
     </header>
-    <div id="game-start">
+    <div id="game-start" class="form-container">
         <h2>Game Info</h2>
-        <form id="gameStartForm" action="play.html">
+        <form id="gameStartForm" class="gameForm" action="play.html">
             <label for="playerOneName">Player 1 Name:</label>
             <br>
             <input type="text" name="playerOne" required>
@@ -49,7 +49,6 @@
             <label for="quizSelection">Select your Quiz:</label>
             <br>
             <select id="questionsSelection"></select>
-            <button id="create-quiz-btn" onclick="location.href='./createquiz.html'" id="quizCreateBtn">Create Quiz</button>
             <div id="button-container">
                 <button id="gameStartFormButton" value="Start Game"> Start Game</button>
             </div>

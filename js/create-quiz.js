@@ -30,7 +30,6 @@ function handleNewQuestionSubmit(event) {
     event.target.questionQuestion.value = null;
     event.target.correctAnswer.value = null;
 
-    console.log(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
     // eslint-disable-next-line no-undef
     new Question(quizName, questionType, questionQuestion, questionResponses, correctAnswer);
 

@@ -7,7 +7,6 @@ const playerTwoIconX = document.getElementById('playerTwoIconX');
 const playerTwoIconO = document.getElementById('playerTwoIconO');
 var newGame;
 
-
 var populateQuizzes = function(){
     if(localStorage['quizBank']) {
         let quizzes = JSON.parse(localStorage['quizBank']);
@@ -109,9 +108,3 @@ if(gameSelect){
     playerOneIconSelector.addEventListener('click', handleIconSelection);
     gameStartForm.addEventListener('submit', handleGameStartForm);
 }
-
-
-
-
-
-

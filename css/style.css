@@ -452,7 +452,11 @@ th, td{
   width: 50%;
   height: 50px;
   font-size: 20px;
-  padding-top: 10px;
+  font-family: 'Galindo', cursive;
+  text-align: center;
+  color: #e41959;
+  padding-top: 20px;
+  letter-spacing: 4px;
   margin: 0 auto;
   border-radius: 10px;
 }

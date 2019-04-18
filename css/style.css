@@ -446,9 +446,9 @@ th, td{
 
 #error-box {
   display: none;
-  background: #fff;
 }
 .error {
+  background: #fff;
   width: 50%;
   height: 50px;
   font-size: 20px;

@@ -104,6 +104,7 @@ function questionTypeHandler(event) {
             responseSection.append(labelEl);
             inputEl.setAttribute('name', `answer${i + 1}`);
             inputEl.setAttribute('type', 'text');
+            inputEl.setAttribute('size', '30%');
             inputEl.setAttribute('placeholder', 'Type response here... ');
             responseSection.append(inputEl);
             radioEl.setAttribute('name', 'correctAnswer');

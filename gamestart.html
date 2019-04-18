@@ -18,42 +18,53 @@
             <a href="leaderboard.html">Leaderboard</a>
         </nav>
     </header>
+
+    <main>
+
+    <h1 class="subPageTitle">Game Start</h1>
+
+    <div id="error-box"></div>
     <div id="game-start" class="form-container">
         <h2>Game Info</h2>
-        <form id="gameStartForm" class="gameForm" action="play.html">
+        <form id="gameStartForm" class="gameForm">
             <label for="playerOneName">Player 1 Name:</label>
             <br>
             <input type="text" name="playerOne" required>
             <div id="playerOneIcon">
                 <label for="playerOneName">Player 1 Icon:</label>
                 <br>
-                <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked>
-                <label for="playerOneIconX">X</label>
-                <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O">
-                <label for="playerOneIconO">O</label>
-            </div>
-            <br>
-            <label for="playerTwoName">Player 2 Name:</label>
-            <br>
-            <input type="text" name="playerTwo" required>
-            <div id="playerTwoIcon">
-                <label for="playerOneName">Player 2 Icon:</label>
+                <input type="text" name="playerOne" required>
+                <div id="playerOneIcon">
+                    <label for="playerOneName">Player 1 Icon:</label>
+                    <br>
+                    <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked>
+                    <label for="playerOneIconX">X</label>
+                    <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O">
+                    <label for="playerOneIconO">O</label>
+                </div>
                 <br>
-                <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X">
-                <label for="playerTwoeIconX">X</label>
-                <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked>
-                <label for="playerTwoIconO">O</label>
-            </div>
-            <br>
-    
-            <label for="quizSelection">Select your Quiz:</label>
-            <br>
-            <select id="questionsSelection"></select>
-            <div id="button-container">
-                <button id="gameStartFormButton" value="Start Game"> Start Game</button>
-            </div>
-        </form>
-    </div>
+                <label for="playerTwoName">Player 2 Name:</label>
+                <br>
+                <input type="text" name="playerTwo" required>
+                <div id="playerTwoIcon">
+                    <label for="playerOneName">Player 2 Icon:</label>
+                    <br>
+                    <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X">
+                    <label for="playerTwoeIconX">X</label>
+                    <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked>
+                    <label for="playerTwoIconO">O</label>
+                </div>
+                <br>
+        
+                <label for="quizSelection">Select your Quiz:</label>
+                <br>
+                <select id="questionsSelection"></select>
+                <div id="button-container">
+                    <button id="gameStartFormButton" value="Start Game"> Start Game</button>
+                </div>
+            </form>
+        </div>
+    </main>
     <footer>&copy; 2019</footer>
 
     <script src="./js/questions.js"></script>

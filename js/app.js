@@ -8,6 +8,7 @@ var playerTwoChoices = [];
 
 var gridSquares = document.getElementsByClassName('gridSquare');
 var questionBox = document.getElementById('question');
+var resultsBox = document.getElementById('resultsBox');
 
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
@@ -247,6 +248,9 @@ var showQuestionForm = function(question) {
         elRadio.setAttribute('type', 'radio');
         elRadio.setAttribute('name', 'questionResponses');
         elRadio.setAttribute('value', i);
+        if(i === 0) {
+            elRadio.setAttribute('checked', true);
+        }
         questionShowForm.appendChild(elRadio);
         questionShowForm.appendChild(radioLabel);
         questionShowForm.appendChild(br);
@@ -403,6 +407,7 @@ var stopGame = (thisGame, winner, otherPlayer) => {
     var winnerTitle = document.getElementById('winnerTitle');
     var drawTitle = document.getElementById('draw');
 
+
     // updated player object with a win
     if(winner){
         winner.numWins++;
@@ -412,9 +417,13 @@ var stopGame = (thisGame, winner, otherPlayer) => {
     } else {
         thisGame.playerOne.numDraws++;
         thisGame.playerTwo.numDraws++;
-        drawTitle.textContent = `It's a draw between ${thisGame.playerTwo.userName} and ${thisGame.playerTwo.userName}.`;
+        drawTitle.textContent = `It's a draw between ${thisGame.playerOne.userName} and ${thisGame.playerTwo.userName}.`;
         console.log('It\'s a tie');
     }
+
+    // show the results box
+    resultsBox.classList.remove('hideResultsBox');
+    resultsBox.classList.add('showResultsBox');
 
     //increase amount of games played
     thisGame.playerOne.totalGames++;

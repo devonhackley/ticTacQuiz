@@ -266,9 +266,6 @@ var showQuestionForm = function(question) {
     elSubmit.setAttribute('id', 'user-response-button');
     elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
-    userResponseButton = document.getElementById('user-response-button');
-    console.log(userResponseButton);
-
     console.log(question.correctAnswer);
 
 };

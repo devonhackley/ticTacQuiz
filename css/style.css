@@ -434,3 +434,11 @@ th, td{
   display: none;
   background: #fff;
 }
+.error {
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+  padding-top: 10px;
+  margin: 0 auto;
+  border-radius: 10px;
+}

@@ -27,7 +27,7 @@ function checkNames(name1, name2){
 }
 
 var handleGameStartForm = function(event){
-    event.preventDefault();
+    event.preventDefaulqt();
     // game info
     const p1 = event.target.playerOne.value.toLowerCase();
     const p2 = event.target.playerTwo.value.toLowerCase();
@@ -71,10 +71,14 @@ var handleGameStartForm = function(event){
         }
         // create new game from inputs
         var origin = window.location.origin;
-        window.location.assign(`${origin}/play.html?`);
+        if (origin === 'https://devonhackley.github.io') {
+            origin +='/ticTacQuiz';
+        }
+        window.location.assign(`${origin}/play.html`);
         createGame(selectedQuiz, player1, player2);
     } else {
         errorBox.textContent = 'Players must have unique names';
+        errorBox.classList.add('error');
         errorBox.style.display = 'block';
     }
 };

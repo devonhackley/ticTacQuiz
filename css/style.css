@@ -177,6 +177,30 @@ th, td{
   background-color: white;
 }
 
-.hideQuestionBox {
+/* #resultsBox {
+  border: 2px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -350px;
+  width: 700px;
+  height: 400px;
+  background-color: white;
+} */
+
+.showResultBox {
+  border: 2px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -350px;
+  width: 700px;
+  height: 400px;
+  background-color: white;
+}
+
+.hideQuestionBox, .hideResultBox {
   display: none;
 }

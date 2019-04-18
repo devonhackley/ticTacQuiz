@@ -2,6 +2,7 @@
 
 
 const Cell = function(){
+    this.id;
     this.mcQuestions = [];
     this.tieBreakerQuestion = [];
     this.winner;
@@ -35,6 +36,7 @@ Grid.prototype.initializeGrid = function(questionBank){
     //add tie breaker question to each cell, and 2 mc questions to each cell
     var mcIndexTracker = 0;
     for (var i = 0; i < 9; i++) {
+        this.cells[i]['id'] = i;
         this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
         this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
         this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
@@ -44,20 +46,6 @@ Grid.prototype.initializeGrid = function(questionBank){
     console.log('Initialized Grid');
 };
 
-Grid.prototype.showQuestion = function(index){
-    console.log('question has been shown', index);
-};
-
-Grid.prototype.getCellSelection = function(e){
-    console.log(e.target.id);
-    console.log('selected cell');
-    return 0;
-};
-
-
-Grid.prototype.updateGrid = function(){
-    console.log('grid has been updated');
-};
 // accepts an array and returns a new shuffled array of size randomizedArrayLength
 Grid.prototype.randomizeArray = function(arr, randomizedArrayLength) {
     var randomizedArr = [];

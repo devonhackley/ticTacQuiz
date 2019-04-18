@@ -11,7 +11,7 @@ var playerTwoPoints = 0;
 
 var gridSquares = document.getElementsByClassName('gridSquare');
 var questionBox = document.getElementById('question');
-var userResponseButton;
+
 if (!localStorage['games']){
     localStorage.setItem('games', JSON.stringify([]));
 }
@@ -132,7 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(gamesInLocalStorage.length && gridSquares.length) {
         // this game is always the last game that is saved in local storage
-        var thisGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
+        var aGame = gamesInLocalStorage[gamesInLocalStorage.length - 1];
+        var thisGame = new Game(aGame.quizName, aGame.playerOne, aGame.playerTwo);
+        thisGame.grid.initializeGrid(thisGame.questionBank);
 
         populateGridIconsOnDom(thisGame);
         //addBoxListeners(thisGame);
@@ -201,51 +203,29 @@ var clickHandler = (e, thisGame) => {
 
     //check for question
     var question;
-    var response;
-
     if (thisGame.grid.cells[cellIndex].mcQuestions.length) {
         question = thisGame.grid.cells[cellIndex].mcQuestions[thisGame.grid.cells[cellIndex].mcQuestions.length - 1];
-        showQuestionForm(question);
-        // showTieBreakerQuestion(cellData);
-
-
         //question = thisGame.grid.cells[cellIndex].mcQuestions.pop();
-
-        // get MC Form
-        // show mcQuestion in question area
-
-        //add event listener to form submit button
-        if(userResponseButton){
-            userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData));
-        }
-        // console.log(response);
         // // get data from user input
         // //if active player is correct, cell winner is active player
 
     } else {
         //tie breaker
-
         question = thisGame.grid.cells[cellIndex].tfQuestions[thisGame.grid.cells[cellIndex].tfQuestions.length - 1];
-        showQuestionForm(question);
-
-
-
         //question = thisGame.grid.cells[cellIndex].tfQuestions.pop();
-
-        // get TF Question Form
-        // show mcQuestion in question area
-
-        //add event listener to form submit button
-        if(userResponseButton){
-            userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData));
-        }
-
         // get data from user input
         //if active player is correct, cell winner is active player
         //else cell winner is inactive player
 
     }
 
+    showQuestionForm(question);
+    var userResponseButton = document.getElementById('user-response-button');
+    console.log(userResponseButton);
+    //add event listener to form submit button
+    if(userResponseButton){
+        userResponseButton.addEventListener('click', (e) => handleQuestionResponse(e, cellData, question, activePlayer, inactivePlayer, thisGame));
+    }
     //switch turns
 
     //replace game info in game local storage and save
@@ -262,7 +242,7 @@ var showQuestionForm = function(question) {
     let questionShowForm = document.getElementById('questionShowForm');
     let elLabel = document.createElement('label');
     let br = document.createElement('br');
-    let elSubmit = document.createElement('button');
+    let elSubmit = document.createElement('input');
     elLabel.innerHTML = questionToAsk;
     elLabel.setAttribute('for', 'questionResponses');
     questionShowForm.appendChild(elLabel);
@@ -275,21 +255,24 @@ var showQuestionForm = function(question) {
         radioLabel.textContent = questionResponse[i];
         elRadio.setAttribute('type', 'radio');
         elRadio.setAttribute('name', 'questionResponses');
-        elRadio.setAttribute('value', questionResponse[i]);
+        elRadio.setAttribute('value', i);
         questionShowForm.appendChild(elRadio);
         questionShowForm.appendChild(radioLabel);
         questionShowForm.appendChild(br);
     }
+    elSubmit.setAttribute('type', 'submit');
     elSubmit.setAttribute('id', 'user-response-button');
     elSubmit.textContent = 'Submit Answer';
     questionShowForm.appendChild(elSubmit);
     userResponseButton = document.getElementById('user-response-button');
     console.log(userResponseButton);
 
+    console.log(question.correctAnswer);
+
 };
 
 
-var checkWinConditions = () => {
+var gameHasWinner = () => {
     if (playerOnePoints === 3) {
         console.log('Player 1 Wins!');
         return true;
@@ -304,7 +287,9 @@ var checkWinConditions = () => {
 };
 
 
-var keepScore = () => {
+var hasWinConditions = () => {
+
+    var result;
     // loop through the win conditions
     for(var i = 0; i < winConditions.length; i++) {
         let innerArr = winConditions[i];
@@ -314,18 +299,20 @@ var keepScore = () => {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerOnePoints++;
                 // checkWin logic
-                checkWinConditions();
+                result = gameHasWinner();
             } else if (playerTwoChoices.includes(innerArr[j])) {
                 // add a point for each matching id in any of the win condition. 3 matching id's in a given array will award three points.
                 playerTwoPoints++;
                 // checkWin logic
-                checkWinConditions();
+                result = gameHasWinner();
             }
         }
         // zero out the players points if neither player reached 3 points through the check.
         playerOnePoints = 0;
         playerTwoPoints = 0;
     }
+
+    return result;
 };
 
 // adding boxlistners
@@ -343,13 +330,53 @@ var removeBoxListeners = () => {
     }
 };
 
-var handleQuestionResponse = (e, cellData) => {
+var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlayer, thisGame) => {
     e.preventDefault();
     // handle what to do with the response
     console.log('Handling question response');
-    // var response = parseInt(e.target.previousElementSibling.value);
-};
+    
+    let questionShowForm = document.getElementById('questionShowForm');
+   
+    var userResponse;
+    
+    for (var i = 0;  i < question.questionResponses.length; i++) {
+        if(e.target.form[i].checked){
+            userResponse = i;
+        }
+    }
 
+    if(question.correctAnswer === userResponse) {
+        cellData.winner = activePlayer;
+        cellData.winnerIcon = activePlayer.icon;
+        if (thisGame.isPlayerOneTurn) {
+            playerOneChoices.push(cellData.id);
+        } else {
+            playerTwoChoices.push(cellData.id); 
+        }
+        console.log('there');
+    } else {
+        
+        if(question.questionType === 'TrueFalse') {
+            cellData.winner = inactivePlayer;
+            cellData.winnerIcon = inactivePlayer.icon;
+            if (thisGame.isPlayerOneTurn) {
+                playerOneChoices.push(cellData.id);
+            } else {
+                playerTwoChoices.push(cellData.id); 
+            }
+        } 
+    }
+    var gameOver = hasWinConditions();
+
+    if(gameOver) {
+        stopGame();
+    } else {
+        console.log(thisGame.switchTurns);
+        thisGame.switchTurns();
+        console.log(Object.getPrototypeOf(thisGame) === Game.prototype);
+        console.log(thisGame.isPlayerOneTurn);
+    }
+};
 
 // end the game
 var stopGame = (winner) => {
@@ -364,6 +391,4 @@ var stopGame = (winner) => {
     }
 
     // popup for the results message with options that can either take you to a new game or view leaderboards
-
-
 };

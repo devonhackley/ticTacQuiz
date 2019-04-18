@@ -27,7 +27,7 @@ function checkNames(name1, name2){
 }
 
 var handleGameStartForm = function(event){
-    event.preventDefaulqt();
+    event.preventDefault();
     // game info
     const p1 = event.target.playerOne.value.toLowerCase();
     const p2 = event.target.playerTwo.value.toLowerCase();

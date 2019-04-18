@@ -17,8 +17,6 @@ function Player(userName, icon) {
     updateLocalStorage('playerBank', playerBank);
 }
 
-
-
 if(localStorage['playerBank']){
     playerBank = JSON.parse(localStorage['playerBank']);
 } else {

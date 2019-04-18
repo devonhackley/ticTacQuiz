@@ -287,7 +287,20 @@ th, td{
   background-color: white;
 }
 
-/* #resultsBox {
+#resultsBox {
+  border: 2px solid black;
+  color: green;
+  /* position: absolute; */
+  /* top: 50%;
+  left: 50%; */
+  /* margin-top: -200px; */
+  margin-left: 50px;
+  width: 300px;
+  height: 600px;
+  background-color: white;
+}
+
+/* .showResultBox {
   border: 2px solid black;
   position: absolute;
   top: 50%;
@@ -298,18 +311,6 @@ th, td{
   height: 400px;
   background-color: white;
 } */
-
-.showResultBox {
-  border: 2px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -200px;
-  margin-left: -350px;
-  width: 700px;
-  height: 400px;
-  background-color: white;
-}
 
 .hideQuestionBox, .hideResultBox {
   display: none;

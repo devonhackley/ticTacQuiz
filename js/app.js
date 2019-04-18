@@ -5,9 +5,6 @@ var winConditions = [[0,1,2], [0,3,6], [0,4,8], [1,4,7], [2,5,8], [3,4,5],[6,7,8
 // track the choices each player makes
 var playerOneChoices = [];
 var playerTwoChoices = [];
-// keep a point system to check if a player has won. 3 points = a win
-var playerOnePoints = 0;
-var playerTwoPoints = 0;
 
 var gridSquares = document.getElementsByClassName('gridSquare');
 var questionBox = document.getElementById('question');
@@ -131,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
         var thisGame = new Game(aGame.quizName, aGame.playerOne, aGame.playerTwo);
         thisGame.grid.initializeGrid(thisGame.questionBank);
 
+        //show first player's turn
+        showCurrentPlayerOnDom(thisGame.playerOne.userName);
+
+        //update icons for grid
         populateGridIconsOnDom(thisGame);
     }
 
@@ -157,7 +158,7 @@ var populateGridIconsOnDom = function(thisGame) {
             }
 
             //remove event Listener
-            gridSquares[i].removeEventListener('click', (event) => clickHandler(event, thisGame));
+            gridSquares[i].style.pointerEvents = 'none';
 
             if(numWins === 9){
                 //end Game
@@ -167,6 +168,7 @@ var populateGridIconsOnDom = function(thisGame) {
     }
 };
 
+//handles game flow logic once a cell on grid is clicked
 var clickHandler = (e, thisGame) => {
     //get index of grid cell clicked
     var cellIndex = e.target.id;
@@ -184,8 +186,6 @@ var clickHandler = (e, thisGame) => {
         inactivePlayer = thisGame.playerOne;
     }
     console.log(`activePlayer is ${activePlayer.userName}`);
-    //TODO
-    // write active Player to Dom
 
     //get the cell data for the grid cell index of index of cell clicked on front end
     var cellData = thisGame.grid.cells[cellIndex];
@@ -193,9 +193,9 @@ var clickHandler = (e, thisGame) => {
 
     //set the question - if no more MC questions in cell, get the tie breaker
     var question;
-    
+
     if (cellData.mcQuestions.length) {
-        question = cellData.mcQuestions[cellData.mcQuestions.length - 1]; 
+        question = cellData.mcQuestions[cellData.mcQuestions.length - 1];
         console.log(cellData.mcQuestions.length);
     } else {
         //tie breaker question
@@ -205,6 +205,7 @@ var clickHandler = (e, thisGame) => {
 
     //display question to user
     showQuestionForm(question);
+    showLastPlayInfoOnDom('Waiting on your response....');
 
     //add event listener to form submit button
     var userResponseButton = document.getElementById('user-response-button');
@@ -215,6 +216,9 @@ var clickHandler = (e, thisGame) => {
 
 // function to populate a form for the question when a square is clicked.
 var showQuestionForm = function(question) {
+    var grid = document.getElementById('grid');
+    grid.style.pointerEvents = 'none';
+
     console.log('Displaying Question Form!');
     let questionDiv = document.getElementById('questionBox');
     questionDiv.style.display = 'block';
@@ -260,16 +264,17 @@ var hasWinConditions = (winner) => {
         arrayToCheck = playerTwoChoices;
     }
 
-    console.log(arrayToCheck);
     if(arrayToCheck.length < 3){
         return false;
     }
 
     var hasWinner;
-    
+
     // loop through the win conditions
     for(var i = 0; i < winConditions.length; i++) {
         let innerArr = winConditions[i];
+
+        // keep a point system to check if a player has won. 3 points = a win
         var points = 0;
 
         // loop through the players choices arrays and check against the win condition arrays[i]
@@ -288,13 +293,15 @@ var hasWinConditions = (winner) => {
     return hasWinner;
 };
 
+//processes user input form the form
 var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlayer, thisGame) => {
     e.preventDefault();
     // handle what to do with the response
 
     var userResponse;
+    var message;
 
-    for (var i = 0;  i < question.questionResponses.length; i++) {
+    for (var i = 0; i < question.questionResponses.length; i++) {
         if(e.target.form[i].checked){
             userResponse = i;
         }
@@ -303,6 +310,10 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
 
     if(question.correctAnswer === userResponse) {
         console.log('question was answered correctly');
+
+        message = `Way to go, ${activePlayer.userName.toUpperCase()}, you earned that square`;
+        showLastPlayInfoOnDom(message);
+
         cellData.winner = activePlayer;
         cellData.winnerIcon = activePlayer.icon;
         if (thisGame.isPlayerOneTurn) {
@@ -310,19 +321,29 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
             winner = 'PlayerOne';
         } else {
             playerTwoChoices.push(cellData.id);
-            winner = 'PlayerTwo'; 
+            winner = 'PlayerTwo';
         }
     } else {
         console.log('question was NOT answered correctly');
+
+        //display message on DOM
+        message = `Hard Luck ${activePlayer.userName.toUpperCase()}, that was not correct.`;
+        showLastPlayInfoOnDom(message);
+
         if(question.questionType === 'TrueFalse') {
             cellData.winner = inactivePlayer;
             cellData.winnerIcon = inactivePlayer.icon;
+
+            //display message on DOM
+            message = `You stole that square, ${inactivePlayer.userName.toUpperCase()}`;
+            showLastPlayInfoOnDom(message);
+
             if (thisGame.isPlayerOneTurn) {
                 playerOneChoices.push(cellData.id);
                 winner = 'PlayerOne';
             } else {
-                playerTwoChoices.push(cellData.id); 
-                winner = 'PlayerTwo'; 
+                playerTwoChoices.push(cellData.id);
+                winner = 'PlayerTwo';
             }
         }
     }
@@ -336,60 +357,74 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
     if(winner) {
         var gameOver = hasWinConditions(winner);
     }
-    
+
     let questionDiv = document.getElementById('questionBox');
     questionDiv.style.display = 'none';
     if(gameOver) {
-        console.log(` active player has a win condition`);
-        console.log(cellData);
+        console.log(' active player has a win condition');
         if(cellData['winnerIcon'] === 'O') {
             gridSquares[cellData.id].innerHTML = '<i class="fas fa-circle"' + 'id=' + cellData.id + '></i>';
         } else {
             gridSquares[cellData.id].innerHTML = '<i class="fas fa-times"' + 'id=' + cellData.id + '></i>';
         }
-        
+
         stopGame(thisGame, activePlayer, inactivePlayer);
     } else {
-        console.log(`does not have a win condition`);
+        console.log('does not have a win condition');
         thisGame.switchTurns();
+
+        //update dom with next player
+        showCurrentPlayerOnDom(inactivePlayer.userName);
+
+        //add clicks events back to grid
+        var grid = document.getElementById('grid');
+        grid.style.pointerEvents = 'auto';
+
+        //update grid icons
         populateGridIconsOnDom(thisGame);
-    } 
+    }
 };
 
 // end the game
 var stopGame = (thisGame, winner, otherPlayer) => {
     console.log('ending game!');
-    var winnerText = document.getElementById('winnerTitle');
-    var drawText = document.getElementById('draw');
-    var resultsBox = document.getElementById('resultsBox');
+    var grid = document.getElementById('grid');
+    grid.style.pointerEvents = 'none';
+
+    var gameButtons = document.getElementById('game-buttons');
+    var winnerTitle = document.getElementById('winnerTitle');
+    var drawTitle = document.getElementById('draw');
 
     // updated player object with a win
     if(winner){
         winner.numWins++;
         otherPlayer.numLosses++;
-        winnerText.textContent = `${winner.userName} has won this match!`;
+        winnerTitle.textContent = `${winner.userName} has won this match!`;
         console.log(`${winner.userName} has won this match!`);
     } else {
         thisGame.playerOne.numDraws++;
         thisGame.playerTwo.numDraws++;
-        drawText.textContent = `It's a draw between ${thisGame.playerTwo.userName} and ${thisGame.playerTwo.userName}.`;
+        drawTitle.textContent = `It's a draw between ${thisGame.playerTwo.userName} and ${thisGame.playerTwo.userName}.`;
         console.log('It\'s a tie');
     }
-    
+
     //increase amount of games played
     thisGame.playerOne.totalGames++;
     thisGame.playerTwo.totalGames++;
-    
-    resultsBox.classList.add('showResultsBox');
 
     //update game status
     thisGame.isOver = true;
     updateGameInfoInlocalStorage(thisGame);
     updatePlayerInfoInLocalStorage(thisGame);
-    //show option to play again
+
     //show option to view leaderboard
+    var buttonEl = document.createElement('button');
+    buttonEl.innerText = 'View Leaderboard';
+    buttonEl.innerHTML = '<button id="leaderboard-button">Show Me Leaderboard</button>';
+    gameButtons.appendChild(buttonEl);
 };
 
+//updates player infor in local storage
 var updatePlayerInfoInLocalStorage = function(thisGame) {
     console.log('Updating Player in Local storage');
     //add player back to local storage
@@ -405,6 +440,7 @@ var updatePlayerInfoInLocalStorage = function(thisGame) {
     localStorage.setItem('playerBank', JSON.stringify(playerBank));
 };
 
+//updates game info in local storage
 var updateGameInfoInlocalStorage = function(thisGame) {
     console.log('Updating Game information in Local Storage');
     // save game information in local storage
@@ -414,4 +450,18 @@ var updateGameInfoInlocalStorage = function(thisGame) {
     games.push(thisGame);
     var gamesToBeSaved = JSON.stringify(games);
     localStorage['games'] = gamesToBeSaved;
+};
+
+//displays Name of active player to Dom;
+var showCurrentPlayerOnDom = function(userName){
+    // write active Player to Dom
+    var currentPlayerName = document.getElementById('current-player-name');
+    currentPlayerName.innerText = userName.toUpperCase();
+};
+
+//stats info on dom
+var showLastPlayInfoOnDom = function(message){
+    // write active Player to Dom
+    var lastPlayInfo = document.getElementById('last-play-info');
+    lastPlayInfo.textContent = message;
 };

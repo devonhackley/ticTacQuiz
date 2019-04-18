@@ -292,6 +292,7 @@ form {
 #leaderboard {
   width: 90%;
   margin: 90px auto;
+  color:white;
 }
 
 table{
@@ -355,4 +356,9 @@ th, td{
 
 .hideQuestionBox, .hideResultBox {
   display: none;
+}
+
+#error-box {
+  display: none;
+  background: #fff;
 }

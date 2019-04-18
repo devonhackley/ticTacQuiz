@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 @import url('https://fonts.googleapis.com/css?family=Galindo');
-@import url('https://fonts.googleapis.com/css?family=Heebo:900');
+@import url('https://fonts.googleapis.com/css?family=Heebo:700');
 
 
 .profilePic {
@@ -139,8 +139,8 @@ form button:focus{
   background: magenta;
 }
 
-/******************* GameStart CSS *****************/
-#game-start {
+/******************* Form CSS *****************/
+.form-container {
   width: 50%;
   height: 610px;
   background: #fff;
@@ -150,7 +150,7 @@ form button:focus{
   transition: 0.6s;
   font-family: 'Heebo', sans-serif;
 }
-#game-start h2 {
+.form-container h2 {
   height: 40px;
   background-color: #ddd;
   padding-left: 30px;
@@ -160,34 +160,35 @@ form button:focus{
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-#gameStartForm {
+.gameForm {
   width: 100%;
   margin-left: 50px;
   margin-top: 15px;
   font-size: 22px;
+  letter-spacing: 2px;
 }
 
-#gameStartForm label {
+.gameForm label {
   margin-bottom: 10px;
 }
-#gameStartForm input {
+.gameForm input {
   margin-left: 2px;
   margin-bottom: 10px;
   width: 425px;
   height: 20px;
 }
-#gameStartForm select {
+.gameForm select {
   width: 425px;
   font-family: 'Heebo', sans-serif;
   font-size: 16px;
   margin-right: 30px;
   cursor: pointer;
 }
-#gameStartForm select:focus {
+.gameForm select:focus {
   text-decoration: none;
   outline: none;
 }
-#gameStartForm input[type="radio"] {
+.gameForm input[type="radio"] {
   position: relative;
   cursor: pointer;
   font-size: 22px;

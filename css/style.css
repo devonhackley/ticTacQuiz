@@ -425,7 +425,7 @@ th, td{
   margin-left: -350px;
   width: 700px;
   height: 400px;
-  background-color: white;
+  background-color: transparent;
 }
 
 .showResultBox {

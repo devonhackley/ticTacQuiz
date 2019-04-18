@@ -22,27 +22,37 @@
         <h2>Game Info</h2>
         <form id="gameStartForm" action="play.html">
             <label for="playerOneName">Player 1 Name:</label>
+            <br>
             <input type="text" name="playerOne" required>
             <div id="playerOneIcon">
                 <label for="playerOneName">Player 1 Icon:</label>
-                <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked> X
-                <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O"> O
+                <br>
+                <input id="playerOneIconX"name="playerOneIcon" type="radio" value="X" checked>
+                <label for="playerOneIconX">X</label>
+                <input id="playerOneIconO"name="playerOneIcon" type="radio" value="O">
+                <label for="playerOneIconO">O</label>
             </div>
             <br>
             <label for="playerTwoName">Player 2 Name:</label>
+            <br>
             <input type="text" name="playerTwo" required>
             <div id="playerTwoIcon">
                 <label for="playerOneName">Player 2 Icon:</label>
-                <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X"> X
-                <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked> O
+                <br>
+                <input id="playerTwoIconX" name="playerTwoIcon" type="radio" value="X">
+                <label for="playerTwoeIconX">X</label>
+                <input id="playerTwoIconO" name="playerTwoIcon" type="radio" value="O"checked>
+                <label for="playerTwoIconO">O</label>
             </div>
             <br>
     
             <label for="quizSelection">Select your Quiz:</label>
+            <br>
             <select id="questionsSelection"></select>
-            <button onclick="location.href='./createquiz.html'" id="quizCreateBtn">Create Your Own Quiz</button>
-    
-            <button id="gameStartFormButton" value="Start Game"> Start Game</button>
+            <button id="create-quiz-btn" onclick="location.href='./createquiz.html'" id="quizCreateBtn">Create Quiz</button>
+            <div id="button-container">
+                <button id="gameStartFormButton" value="Start Game"> Start Game</button>
+            </div>
         </form>
     </div>
     <footer>&copy; 2019</footer>

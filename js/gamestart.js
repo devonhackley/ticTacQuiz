@@ -64,9 +64,6 @@ function createGame(quiz, play1, play2){
     // create new game from inputs
     newGame = new Game(quiz, play1, play2); // eslint-disable-line
 
-    //initialize grid for the new game
-    newGame.grid.initializeGrid(newGame.questionBank);
-
     //add game to local storage
     var games = JSON.parse(localStorage['games']);
     games.push(newGame);

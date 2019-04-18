@@ -139,6 +139,10 @@ form button:focus{
   background: magenta;
 }
 
+.tie-breaker-square {
+  background: rgb(255, 0, 0) !important;
+}
+
 /******************* Form CSS *****************/
 .form-container {
   width: 50%;

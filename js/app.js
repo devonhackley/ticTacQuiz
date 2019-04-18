@@ -75,8 +75,7 @@ var saveTestQuestionsInBank = function() {
     new Question('TEST', 'multipleChoice', '19What does HTML stand for?', ['Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Hyper Text Makrup Language', 'Hyper Tools Markup Language'], 2);
 };
 
-saveTestQuestionsInBank();
-console.log('Test Question Bank Saved');
+
 
 var saveDefaultQuestionsInBank = function() {
     new Quiz('DEFAULT');
@@ -116,6 +115,8 @@ var saveDefaultQuestionsInBank = function() {
 };
 
 saveDefaultQuestionsInBank();
+saveTestQuestionsInBank();
+console.log('Test Question Bank Saved');
 
 
 // adding event listeners for the boxes when the DOM content loads

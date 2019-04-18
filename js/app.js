@@ -86,7 +86,7 @@ var saveDefaultQuestionsInBank = function() {
     new Question('DEFAULT', 'MultipleChoice', 'Which of the following is NOT a data type in JavaScript?', ['number', 'string', 'variable', 'boolean'], 2);
     new Question('DEFAULT', 'MultipleChoice', 'How would you access the 3rd element in the array \'fruits\'? ', ['fruits[3]', 'fruits{2}', 'fruits(3)', 'fruits[2]'], 3);
 
-    new Question('DEFAULT', 'MultipleChoice', 'Which of the following is not a type of list in HTML?', ['numbered', 'ordered', 'unordered', 'definition'], 0);
+    new Question('DEFAULT', 'MultipleChoice', 'Which of the following is NOT a type of list in HTML?', ['numbered', 'ordered', 'unordered', 'definition'], 0);
     new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, which of the following is NOT an arithmetic operator?', ['/', 'x', '+', '-'], 1);
     new Question('DEFAULT', 'MultipleChoice', 'In Javascript, what do you call information that is passed to a function as inputs?', ['variables', 'values', 'parameters', 'statements'], 2);
     new Question('DEFAULT', 'MultipleChoice', 'In CSS, which of the following is NOT a position value?', ['relative', 'absolute', 'fixed', 'float'], 3);
@@ -98,7 +98,7 @@ var saveDefaultQuestionsInBank = function() {
     new Question('DEFAULT', 'MultipleChoice', 'From outside in, what is the order of the CSS Box Model?', ['Content, Margin, Border, Padding', 'Margin, Border, Padding, Content', 'Margin, Padding, Border, Content', 'Border, Margin, Padding, Content'], 1);
     new Question('DEFAULT', 'MultipleChoice', 'In CSS, you can select a color by using:', ['RGB value', 'Hex value', 'Name of the color', 'All of the above'], 3);
 
-    new Question('DEFAULT', 'MultipleChoice', 'In HTML, which of the following is not an input type?', ['radio', 'input', 'text', 'submit'], 1);
+    new Question('DEFAULT', 'MultipleChoice', 'In HTML, which of the following is NOT an input type?', ['radio', 'input', 'text', 'submit'], 1);
     new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, how can you find the number of properties in an object \'objectName\'?', ['objectName.length', 'Object.keys(objectName).length', 'lengthOf(objectName)', 'objectName.properties.howMany'], 1);
     new Question('DEFAULT', 'MultipleChoice', 'In JavaScript, which of the following is NOT a standard error type?', ['Syntax error', 'Type error', 'Range error', 'Format error'], 3);
 

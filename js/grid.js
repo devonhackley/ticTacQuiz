@@ -37,12 +37,11 @@ Grid.prototype.initializeGrid = function(questionBank){
     var mcIndexTracker = 0;
     for (var i = 0; i < 9; i++) {
         this.cells[i]['id'] = i;
-        this.cells[i]['tieBreakerQuestion'] = tfQuestions[randomTrueFalseIndices[i]];
+        this.cells[i]['tieBreakerQuestion'][0] = tfQuestions[randomTrueFalseIndices[i]];
         this.cells[i]['mcQuestions'][0] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker]];
         this.cells[i]['mcQuestions'][1] = mcQuestions[randomMultipleChoiceIndices[mcIndexTracker + 1 ]];
         mcIndexTracker += 2;
     }
-
     console.log('Initialized Grid');
 };
 

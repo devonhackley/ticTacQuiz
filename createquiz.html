@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Tic Tac Quiz</title>
   </head>
+
   <body>
+
     <header>
       <nav>
         <a href="index.html">Home</a>
@@ -18,39 +20,29 @@
         <a href="leaderboard.html">Leaderboard</a>
       </nav>
     </header>
+
     <main>
-      <h1>Create Your Own Quiz!</h1>
+      <h1 id="createQuizTitle">Create Your Own Quiz!</h1>
 
-      <h2></h2>
-
-      <form action="gamestart.html">
-        <input type="submit" id="playButton" value="Let's Play">
-      </form>
-
-
-      <section id="currentQuizSection">
+      <section id="currentQuizSection" class="form-container">
         <h2>Questions in Current Quiz:</h2>
-        <ol id="currentQuizList">
-        </ol>
+        <ol id="currentQuizList"></ol>
       </section>
-      <br/>
-      <br/>
 
       <form id="newQuizForm" class="form-container">
         <fieldset>
+
           <legend>+ New Quiz...</legend>
           <label for="newQuizName">New Quiz Name:</label>
           <input name="newQuizName" type="text" placeholder="Type quiz name here..." required />
           <button id="new-quiz">Add New Quiz</button>
+
         </fieldset>
+
         <label for="quizName">Select Quiz Name:</label>
         <select id="quizName"></select>
+
       </form>
-      <!-- lmao don't judge me for this formatting solution ^ -->
-
-
-
-
 
       <form id="newQuestionForm" class="form-container">
         <fieldset>
@@ -67,10 +59,7 @@
           <br/>
 
           &nbsp; <i>Check the button of the response that you want to be the correct answer.</i>
-          <section id="responseSection">
-
-          </section>
-
+          <section id="responseSection"></section>
           <button id="new-question">Add New Question</button>
 
         </fieldset>

@@ -327,6 +327,20 @@ th, td{
 
 /******************* play.html question form css *****************/
 
+
+@keyframes gridSquare {
+  to {
+    transform: scale(1.1);
+  }
+}
+.gridSquare:hover {
+  animation-name: gridSquare;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 .showQuestionBox {
   border: 2px solid black;
   position: absolute;

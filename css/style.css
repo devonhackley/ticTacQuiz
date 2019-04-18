@@ -240,10 +240,51 @@ form {
 }
 #newQuestionForm , #currentQuizSection {
   display: none;
+  width: 40%;
+  margin: 10px;
+  height: fit-content;
+  padding-bottom: 10px;
+  min-inline-size: min-content;
+}
+#currentQuizSection {
+  width: 50%;
+}
+#newQuizForm {
+  width: 30%;
+  height: fit-content;
+  padding-bottom: 10px;
+  margin: 10px;
+  min-inline-size: min-content;
+}
+#newQuizForm [for="quizName"] {
+  margin-left: 10%;
+  margin-top: 50%;
 }
 
 #currentQuiz {
   float: right;
+}
+[name="questionQuestion"] {
+  width: 80%;
+}
+
+#currentQuizList {
+  overflow-y: scroll;
+  height: 25em;
+}
+
+#createQuizTitle {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 3%;
+  font-size: 60px;
+  color: white;
+  text-shadow:20px 20px 20px rgb(28, 1, 29);
+  font-family: 'Galindo', cursive;
+  margin-bottom: 3%;
+}
+#createQuizPlayButton {
+  float: unset;
 }
 
 /******************* Leaderboard CSS *****************/

@@ -303,17 +303,17 @@ th, td{
 #resultsBox {
   border: 2px solid black;
   color: green;
-  /* position: absolute; */
-  /* top: 50%;
-  left: 50%; */
-  /* margin-top: -200px; */
-  margin-left: 50px;
-  width: 300px;
-  height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -350px;
+  width: 700px;
+  height: 400px;
   background-color: white;
 }
 
-/* .showResultBox {
+.showResultBox {
   border: 2px solid black;
   position: absolute;
   top: 50%;
@@ -323,8 +323,8 @@ th, td{
   width: 700px;
   height: 400px;
   background-color: white;
-} */
+}
 
-.hideQuestionBox, .hideResultBox {
+.hideQuestionBox, .hideResultsBox {
   display: none;
 }

@@ -420,7 +420,7 @@ var stopGame = (thisGame, winner, otherPlayer) => {
     //show option to view leaderboard
     var buttonEl = document.createElement('button');
     buttonEl.innerText = 'View Leaderboard';
-    buttonEl.innerHTML = '<button id="leaderboard-button">Show Me Leaderboard</button>';
+    buttonEl.innerHTML = '<button id="leaderboard-button" type = "button" onclick="window.location.href = \'leaderboard.html\';">Show Me Leaderboard</button>';
     gameButtons.appendChild(buttonEl);
 };
 
@@ -456,7 +456,7 @@ var updateGameInfoInlocalStorage = function(thisGame) {
 var showCurrentPlayerOnDom = function(userName){
     // write active Player to Dom
     var currentPlayerName = document.getElementById('current-player-name');
-    currentPlayerName.innerText = userName.toUpperCase();
+    currentPlayerName.textContent = userName.toUpperCase();
 };
 
 //stats info on dom

@@ -38,6 +38,8 @@ function handleNewQuestionSubmit(event) {
 
 }
 
+const errorBox = document.getElementById('error-box');
+
 // This function is an event handler for the + New Quiz form.
 function handleNewQuizSubmit(event) {
     event.preventDefault();
@@ -45,13 +47,17 @@ function handleNewQuizSubmit(event) {
     var newQuizName = event.target.newQuizName.value;
 
     if (Object.keys(quizBank).includes(newQuizName)) {
-        alert('A quiz with this name already exists!');
+        errorBox.textContent = 'Quiz with that name already exists!';
+        errorBox.classList.add('error');
+        errorBox.style.display = 'block';
 
     } else {
         event.target.newQuizName.value = null;
         // eslint-disable-next-line no-undef
         new Quiz(newQuizName);
-        alert('You\'ve created a new quiz with the name ' + newQuizName + '!');
+        errorBox.textContent = `You've created a new quiz with the name ${newQuizName}!`;
+        errorBox.classList.add('error');
+        errorBox.style.display = 'block';
 
         quizBank = JSON.parse(localStorage['quizBank']);
         fillQuizSelector();

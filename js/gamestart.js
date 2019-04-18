@@ -38,9 +38,9 @@ var handleGameStartForm = function(event){
         players.forEach((play) => {
             const name = play.userName.toLowerCase();
             if(name === p1){
-                player1 = play;
+                player1 = new Player(name, p1Icon);
             } else if (name === p2){
-                player2 = play;
+                player2 = new Player(name, p2Icon);
             }
         });
         if(!Object.keys(player1).length){ // create them if they arent in the playerBank

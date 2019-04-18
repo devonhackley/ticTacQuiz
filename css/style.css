@@ -112,7 +112,7 @@ form button:focus{
 
 /******************* Grid CSS *****************/
 #grid {
-  width: 600px;
+  width: 700px;
   margin: 0 auto;
 }
 
@@ -120,6 +120,7 @@ form button:focus{
   width: 200px;
   height: 200px;
   float: left;
+  border: 3px solid rgb(25, 0, 26);
 }
 
 #grid div i {
@@ -127,20 +128,31 @@ form button:focus{
   display: block;
   text-align: center;
   margin-top: 75px;
-  color: white;
 
 }
 
 #grid div:nth-child(2n) {
-  background: blue;
+  background: #fff;
 }
 
 #grid div:nth-child(2n+1) {
-  background: magenta;
+  background:#fff;;
+}
+.fa-question-circle {
+  color: #000;
+}
+.fa-circle {
+  color:#2BAC76;
+}
+.fa-times {
+  color:#902292;
 }
 
 .tie-breaker-square {
-  background: rgb(255, 0, 0) !important;
+  background: #e41959 !important;
+}
+.tie-breaker-square  .fa-question-circle {
+  color: #fff !important;
 }
 
 /******************* Form CSS *****************/

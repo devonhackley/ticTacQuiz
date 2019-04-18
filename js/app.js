@@ -374,14 +374,11 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
 
 // end the game
 var stopGame = (winner, otherPlayer, thisGame, tie) => {
-  
+
     var winnerText = document.getElementById('winnerTitle');
     var drawText = document.getElementById('drawTitle');
     var resultsBox = document.getElementById('resultsBox');
-    console.log(winner.userName + ' is the winner');
-    console.log(otherPlayer.userName);
-    console.log(localStorage);
-    console.log(JSON.parse(localStorage['playerBank']));
+
     // updated player object with a win
     if(winner){
         thisGame.isOver = true;

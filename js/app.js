@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 var populateGridIconsOnDom = function(thisGame) {
     var numWins = 0;
     var cells = thisGame.grid.cells;
+    console.log(thisGame.playerOne.userName + 'THISSSSSSSSS');
     for(var i = 0; i < cells.length; i++) {
         var gridSquareEL = gridSquares[i];
         if (!cells[i]['winner']) {
@@ -170,7 +171,7 @@ var populateGridIconsOnDom = function(thisGame) {
             if(numWins === 9){
                 //TODO
                 //end Game
-                stopGame(); // stop game will have the populate results
+                stopGame(winner, thisGame); // stop game will have the populate results
             }
         }
     }
@@ -185,6 +186,7 @@ var clickHandler = (e, thisGame) => {
     //determine active player
     let activePlayer;
     let inactivePlayer;
+
     if(thisGame.isPlayerOneTurn) {
         activePlayer = thisGame.playerOne;
         inactivePlayer = thisGame.playerTwo;
@@ -334,11 +336,11 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
     e.preventDefault();
     // handle what to do with the response
     console.log('Handling question response');
-    
+
     let questionShowForm = document.getElementById('questionShowForm');
-   
+
     var userResponse;
-    
+
     for (var i = 0;  i < question.questionResponses.length; i++) {
         if(e.target.form[i].checked){
             userResponse = i;
@@ -355,7 +357,7 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
         }
         console.log('there');
     } else {
-        
+
         if(question.questionType === 'TrueFalse') {
             cellData.winner = inactivePlayer;
             cellData.winnerIcon = inactivePlayer.icon;
@@ -364,7 +366,7 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
             } else {
                 playerTwoChoices.push(cellData.id); 
             }
-        } 
+        }
     }
     var gameOver = hasWinConditions();
 
@@ -379,16 +381,18 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
 };
 
 // end the game
-var stopGame = (winner) => {
+var stopGame = (winner, thisGame) => {
     // save game information in local storage
-
+    console.log(localStorage);
+    console.log(JSON.parse(localStorage['playerBank']));
+    console.log(thisGame.playerOne.userName + 'THISSSSSSSSS');
     // updated player object with a win
-    if(winner){ 
-        playerObject.win++; // placeholder
-    } else if(!winner) {
-        playerObject.tie++; // placeholder
-        console.log('It\'s a tie');
-    }
+    // if(winner){ 
+    //     playerObject.win++; // placeholder
+    // } else if(!winner) {
+    //     playerObject.tie++; // placeholder
+    //     console.log('It\'s a tie');
+    // }
 
     // popup for the results message with options that can either take you to a new game or view leaderboards
 };

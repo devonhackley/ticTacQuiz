@@ -35,6 +35,7 @@ Grid.prototype.initializeGrid = function(questionBank){
 
     //add tie breaker question to each cell, and 2 mc questions to each cell
     var mcIndexTracker = 0;
+    /* eslint-disable no-redeclare*/
     for (var i = 0; i < 9; i++) {
         this.cells[i]['id'] = i;
         this.cells[i]['tieBreakerQuestion'][0] = tfQuestions[randomTrueFalseIndices[i]];

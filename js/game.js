@@ -9,8 +9,9 @@ var Game = function(quizName, playerOne, playerTwo) {
     // Setup grid
     this.isPlayerOneTurn = true;
     this.isOver = false;
+    /* eslint-disable no-undef */
     this.grid = new Grid(this.gameId);
-    console.log('New game created.'); 
+    console.log('New game created.');
 };
 
 //gets the question bank from local storage that is associated with this quiz

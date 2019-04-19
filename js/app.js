@@ -438,6 +438,8 @@ var stopGame = (thisGame, winner, otherPlayer) => {
     //show option to view leaderboard
     var buttonEl = document.createElement('button');
     buttonEl.innerText = 'View Leaderboard';
+    buttonEl.setAttribute('id', 'leaderboard-button');
+    buttonEl.setAttribute('onclick', 'window.location.href = \'leaderboard.html\';');
     gameButtons.appendChild(buttonEl);
 };
 

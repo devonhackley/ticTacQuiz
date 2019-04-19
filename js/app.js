@@ -438,7 +438,6 @@ var stopGame = (thisGame, winner, otherPlayer) => {
     //show option to view leaderboard
     var buttonEl = document.createElement('button');
     buttonEl.innerText = 'View Leaderboard';
-    buttonEl.innerHTML = '<button id="leaderboard-button" type = "button" onclick="window.location.href = \'leaderboard.html\';">Show Me Leaderboard</button>';
     gameButtons.appendChild(buttonEl);
 };
 
@@ -487,4 +486,14 @@ var showLastPlayInfoOnDom = function(message){
 var updateLocalStorage = function(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 };
+
+
+// transition handler for the play gameboard
+var squareWrapper = document.querySelectorAll('.loading');
+
+for(let i = 0; i < squareWrapper.length; i++){
+    setTimeout(function(){
+        squareWrapper[i].classList.remove('loading');
+    }, i * 300);
+}
 

@@ -480,7 +480,6 @@ th {
   margin-left: -350px;
   width: 700px;
   height: 400px;
-  background-color: white;
 }
 
 .hideQuestionBox, .hideResultsBox {
@@ -531,7 +530,7 @@ nav * {
   padding: 2em 2em 0 2em;
   width:38%;
   border-radius: 10px;
-  background-color: #ccc;
+  background-color: rgb(204, 204, 204);
 }
 #questionShowForm > label:nth-child(1){
   font-size: 18px;
@@ -544,7 +543,7 @@ nav * {
     width: 500px;
     height: 250px;
     border-radius: 10px;
-    background-color: #ccc;
+    background-color: rgba(204, 204, 204, .5);
 } 
 #game-buttons {
   width: 100%;

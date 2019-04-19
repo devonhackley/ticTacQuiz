@@ -44,7 +44,7 @@ const errorBox = document.getElementById('error-box');
 function handleNewQuizSubmit(event) {
     event.preventDefault();
 
-    var newQuizName = event.target.newQuizName.value;
+    var newQuizName = event.target.newQuizName.value.toUpperCase();
 
     if (Object.keys(quizBank).includes(newQuizName)) {
         errorBox.textContent = 'Quiz with that name already exists!';
@@ -63,6 +63,7 @@ function handleNewQuizSubmit(event) {
         fillQuizSelector();
     }
 }
+
 
 // This function is an event handler to make the '+ New Question' form appear when a quiz name is selected.
 

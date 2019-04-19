@@ -27,7 +27,16 @@ function rankPlayers(){
         let ranking = document.createElement('td');
         let name = document.createElement('td');
         let wins = document.createElement('td');
-        ranking.textContent = index + 1;
+        let currentIndx = index + 1;
+        if (currentIndx === 1){
+            ranking.innerHTML = '<i class="fas fa-medal one"></i>' + currentIndx;
+        } else if (currentIndx === 2) {
+            ranking.innerHTML = '<i class="fas fa-medal two"></i>' + currentIndx;
+        } else if (currentIndx === 3) {
+            ranking.innerHTML = '<i class="fas fa-medal three"></i>' + currentIndx;
+        } else {
+            ranking.innerHTML = currentIndx;
+        }
         name.textContent = player.userName;
         wins.textContent = player.numWins;
 

@@ -9,7 +9,7 @@
   border-radius: 100px;
 }
 body {
-  background-color: #3F0E40;
+  background-color: #7c00b9;
   background-image: url('../assets/tictac.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,7 +29,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(38,0,39);
+  background-color: #3F0E40;
   color: white;
   text-align: center;
   font-family: 'Galindo', cursive;
@@ -41,7 +41,7 @@ header {
   left: 0;
   top: 0;
   width: 100%;
-  background-color: rgb(38,0,39);
+  background-color: #3F0E40;
   color: white;
   margin-bottom: 20px;
   padding: 10px;
@@ -73,7 +73,7 @@ main {
   font-size: 90px;
   width: 68%;
   margin: 80px auto;
-  /* #00FF00; */
+  text-align: center;
 }
 #game-menu {
   width: 30%;
@@ -98,7 +98,6 @@ main {
 
 #game-menu form button:hover{
   background: #00FF00;
-  opacity: 0.9;
   color: rgb(50, 10, 51);
 }
 #game-menu form button:active {
@@ -362,14 +361,36 @@ form {
 #leaderboard {
   width: 90%;
   margin: 90px auto;
-
-  margin-top: 0;
-
+  /* height: 610px; */
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 10px 20px 0 rgba(39, 38, 38,2);
+  transition: 0.6s;
+  font-family: 'Heebo', sans-serif;
+  text-align: center;
 }
-
+#leaderboard-container {
+  width: 100%;
+}
+.one {
+  color: gold;
+  font-size: 25px;
+  margin-left: -25px;
+}
+.two {
+  color:silver;
+  font-size: 25px;
+  margin-left: -25px;
+}
+.three {
+  color:rgb(209, 77, 0);
+  font-size: 25px;
+  margin-left: -25px;
+}
 table{
   border-spacing: 0;
-  width: 80%;
+  width: 100%;
   height: 500px;
   margin: 0px auto;
 }
@@ -380,11 +401,17 @@ tr:first-child{
 
 th, td{
   margin: 0;
-  padding: .5em 1.5em;
   text-align: center;
   border-width: 1px 0;
   border-color: #000;
   border-style: solid;
+}
+th {
+  font-family: 'Galindo', cursive;
+  font-size: 18px;
+  letter-spacing: 3px;
+  background: #e41959;
+  color: #fff;
 }
 
 /******************* play.html question form css *****************/

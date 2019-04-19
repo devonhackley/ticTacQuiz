@@ -487,3 +487,13 @@ var updateLocalStorage = function(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 };
 
+
+// transition handler for the play gameboard
+var squareWrapper = document.querySelectorAll('.loading');
+
+for(let i = 0; i < squareWrapper.length; i++){
+    setTimeout(function(){
+        squareWrapper[i].classList.remove('loading');
+    }, i * 300);
+}
+

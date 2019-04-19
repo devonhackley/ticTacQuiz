@@ -109,6 +109,26 @@ form button:focus{
 }
 
 /******************* Grid CSS *****************/
+
+@keyframes move-in-steps {
+  0% {
+    left: 0;
+    background: blue;
+  }
+  100% {
+    left: 100%;
+    background: red;
+  }
+}
+
+.gridSquare:hover {
+  animation-name: gridSquare;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 #grid {
   width: 700px;
   margin: 0 auto;
@@ -126,8 +146,23 @@ form button:focus{
   display: block;
   text-align: center;
   margin-top: 75px;
-
 }
+
+.square-wrapper {
+  transition-duration: 1200ms;
+}
+
+.square-wrapper.loading{
+  transform: translate(100em);
+}
+
+/* .square-wrapper:nth-child(odd) .gridSquare {
+  background: orange;
+}
+
+.square-wrapper:nth-child(even) .gridSquare {
+  background: red;
+} */
 
 #grid div:nth-child(2n) {
   background: #fff;
@@ -136,6 +171,7 @@ form button:focus{
 #grid div:nth-child(2n+1) {
   background:#fff;;
 }
+
 .fa-question-circle {
   color: #000;
 }
@@ -421,13 +457,6 @@ th {
     transform: scale(1.1);
   }
 }
-.gridSquare:hover {
-  animation-name: gridSquare;
-  animation-duration: 0.3s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
 
 .showQuestionBox {
   border: 2px solid black;
@@ -435,10 +464,12 @@ th {
   top: 50%;
   left: 50%;
   margin-top: -200px;
-  margin-left: -350px;
-  width: 700px;
-  height: 400px;
+  margin-left: -375px;
+  width: 500px;
+  height: 250px;
   background-color: white;
+  padding: 5em;
+  border-radius: 5em;
 }
 
 #resultsBox {
@@ -488,4 +519,23 @@ th {
 }
 nav * {
   margin-left: 5%;
+}
+
+#questionShowForm label {
+  line-height: 2em;
+  font-family: 'Heebo', sans-serif;
+}
+
+#user-response-button {
+  margin-top: 1em;
+  padding: 10px 15px 11px;
+  font-size: 18px;
+  background-color: #57d6c7;
+  font-weight: bold;
+  text-shadow: 1px 1px #57D6C7;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #57D6C7;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }

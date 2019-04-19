@@ -7,6 +7,7 @@ var playerOneChoices = [];
 var playerTwoChoices = [];
 
 var gridSquares = document.getElementsByClassName('gridSquare');
+/* eslint-disable no-unused-vars */
 var questionBox = document.getElementById('question');
 var resultsBox = document.getElementById('resultsBox');
 
@@ -318,7 +319,7 @@ var handleQuestionResponse = (e, cellData, question, activePlayer, inactivePlaye
     var winner;
 
     if(question.correctAnswer === userResponse) {
-        if(question.questionType === 'TrueFalse') { 
+        if(question.questionType === 'TrueFalse') {
             gridSquares[cellData.id].classList.remove('tie-breaker-square');
         }
         console.log('question was answered correctly');

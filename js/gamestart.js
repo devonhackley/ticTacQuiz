@@ -54,6 +54,7 @@ var handleGameStartForm = function(event){
                     player2.userName = name;
                 }
             });
+            /* eslint-disable no-undef */
             updateLocalStorage('playerBank', players);
             if(!Object.keys(player1).length){ // create them if they arent in the playerBank
                 //create players
@@ -62,7 +63,7 @@ var handleGameStartForm = function(event){
             if(!Object.keys(player2).length) {
                 player2 = new Player(p2, p2Icon); // eslint-disable-line
             }
-    
+
         } else { // no local storage
             //create players
             player1 = new Player(p1, p1Icon); // eslint-disable-line

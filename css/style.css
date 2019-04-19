@@ -79,8 +79,7 @@ main {
   width: 30%;
   height: 300px;
   margin: 30px auto 0px;
-  box-shadow: 0 10px 20px 0 rgba(39, 38, 38,2);
-  transition: 3s;
+  transition: 1s;
 }
 #game-menu form {
   width: 100%;
@@ -93,7 +92,7 @@ main {
   line-height: 80px;
   font-size: 16px;
   font-family: 'Galindo', cursive;
-  box-shadow: 0px 6px #999;
+  box-shadow: 0px 6px rgb(65, 64, 64);
 }
 
 #game-menu form button:hover{
@@ -375,7 +374,7 @@ form {
 }
 .one {
   color: gold;
-  font-size: 25px;
+  font-size: 28px;
   margin-left: -25px;
 }
 .two {

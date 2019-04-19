@@ -251,6 +251,7 @@ var showQuestionForm = function(question) {
         if(i === 0) {
             elRadio.setAttribute('checked', true);
         }
+        questionShowForm.appendChild(br);
         questionShowForm.appendChild(elRadio);
         questionShowForm.appendChild(radioLabel);
         questionShowForm.appendChild(br);

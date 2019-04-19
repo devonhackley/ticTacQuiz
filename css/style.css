@@ -48,9 +48,10 @@ header {
 }
 header a {
   text-decoration: none;
-  color: #fff;
+  color: gold;
   font-family: 'Galindo', cursive;
   padding: 3px;
+  text-shadow: 0 0 20px #e41959, 0 0 10px #fff;
 }
 button {
   cursor: pointer;
@@ -111,7 +112,7 @@ form button:focus{
 /******************* Grid CSS *****************/
 #grid {
   width: 700px;
-  margin: 0 auto;
+  margin: 60px auto;
 }
 
 #grid div {
@@ -485,4 +486,19 @@ th {
   letter-spacing: 4px;
   margin: 0 auto;
   border-radius: 10px;
+}
+#in-play-stats h2 {
+  color: gold;
+  font-size: 33px;
+  line-height: 10px;
+  text-align: center;
+  font-family: 'Galindo', cursive;
+  text-shadow: 0 0 20px #e41959, 0 0 40px #fff;
+}
+#last-play-info {
+  font-size: 18px;
+  color: #00FF00;
+  font-family: 'Heebo', sans-serif;
+  text-align: center;
+  letter-spacing: 3px;
 }

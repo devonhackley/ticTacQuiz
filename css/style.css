@@ -489,3 +489,26 @@ th {
 nav * {
   margin-left: 5%;
 }
+
+/* TEMPORARY CSS FOR IN-GAME */
+#in-play-stats {
+  width: fit-content;
+  float: right;
+  background-color: #fff;
+  border-radius: 10px;
+}
+#in-play-stats * {
+  margin: 5px;
+}
+#resultsBox {
+  background-color: #fff;
+
+}
+#resultsBox * {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#winnerTitle {
+  margin-top: 20%;
+}
